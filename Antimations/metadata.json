@@ -1,0 +1,8 @@
+                                                                            {
+  "name": "Antimations",
+  "creator": "Yedel",
+  "description": "Safely cancels arm swings from yourself and other players", 
+  "version": "1.0.0",
+  "entry": "index.js",
+  "requires": ["PogData"]
+}

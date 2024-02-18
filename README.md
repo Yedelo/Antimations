@@ -4,6 +4,7 @@ Forge mod port: https://github.com/Yedelo/AntimationsMod
 
 ChatTriggers site: https://www.chattriggers.com/modules/v/Antimations
 
+
 Allows for VISUALLY cancelling of animations (swings) from yourself and other players.
 
 

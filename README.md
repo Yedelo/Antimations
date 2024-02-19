@@ -22,3 +22,4 @@ Tested on anticheat-test.com, tree.ac, eu.loyisa.cn (anticheat servers) and Hypi
 
 Use /antimations for the main config, and /antimations (client/server) to toggle them respectively.
 
+Example video: https://youtu.be/behmZVH4Qw0

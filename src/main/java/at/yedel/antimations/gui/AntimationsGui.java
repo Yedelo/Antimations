@@ -9,8 +9,11 @@ import java.net.URI;
 import at.yedel.antimations.Antimations;
 import at.yedel.antimations.config.AntimationsConfig;
 import at.yedel.antimations.utils.Colorful;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.realms.RealmsSharedConstants;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
@@ -51,6 +54,8 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 
     private GuiButton doneButton;
 
+    private String versionString;
+
     @Override
     public void initGui() {
         midpoint = width / 2;
@@ -88,6 +93,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         this.buttonList.add(disableAllButton = new GuiButton(14, midpoint - 42, height - 50, 85, 20, "§cDisable All"));
         this.buttonList.add(resetButton = new GuiButton(15, midpoint + 48, height - 50, 85, 20, "Reset"));
         this.buttonList.add(doneButton = new GuiButton(16, midpoint - 75, height - 25, 150, 20, "Done"));
+        versionString = "v" + Antimations.version + "-" + RealmsSharedConstants.VERSION_STRING;
     }
 
     @Override
@@ -99,6 +105,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         drawCenteredString(fontRendererObj, "Antimations " + Antimations.version + " by Yedel", midpoint, 5, WHITE);
         drawCenteredString(fontRendererObj, "§7Cancels swing animations on players", midpoint, 15, GRAY);
         drawHorizontalLine(midpoint - 122, midpoint + 120, 50, GRAY);
+        drawString(fontRendererObj, versionString, 5, height - fontRendererObj.FONT_HEIGHT - 5, DARK_GRAY);
         for (GuiButton button: buttonList) {
             button.drawButton(mc, mouseX, mouseY);
         }

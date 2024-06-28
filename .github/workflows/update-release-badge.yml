@@ -1,0 +1,29 @@
+name: Update Release Badge
+
+on:
+  push:
+    branches:
+      - 1.8.9
+
+jobs:
+  update-badge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Get Latest Release
+        id: get_release
+        run: |
+          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "::set-output name=tag::$LATEST_TAG"
+
+      - name: Update JSONbin
+        env:
+          JSONBIN_SECRET_KEY: ${{ secrets.JSONBIN_SECRET_KEY }}
+        run: |
+          curl -X PUT \
+            -H "Content-Type: application/json" \
+            -H "secret-key: $JSONBIN_SECRET_KEY" \
+            -d "{\"tag_name\":\"${{ steps.get_release.outputs.tag }}\"}" \
+            https://api.jsonbin.io/b/667e5987acd3cb34a85e70b5

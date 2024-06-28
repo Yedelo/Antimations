@@ -1,4 +1,4 @@
-# AntimationsMod (1.8.9)
+# Antimations (1.8.9)
 
 Cancels swing animations on players. Packets will still be sent so the mod is safe to use for anticheats.
 

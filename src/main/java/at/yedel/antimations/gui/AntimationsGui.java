@@ -43,7 +43,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
     private IconButton discordButton;
 
     private final URI modrinthUri = URI.create("https://modrinth.com/project/antimations");
-    private final URI githubUri = URI.create("https://github.com/Yedelo/AntimationsMod");
+    private final URI githubUri = URI.create("https://github.com/Yedelo/Antimations");
 
     private GuiButton enableAllButton;
     private GuiButton disableAllButton;

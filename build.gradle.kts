@@ -8,7 +8,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
-//Constants:
+// Constants:
 
 val baseGroup: String by project
 val mcVersion: String by project
@@ -23,7 +23,6 @@ java {
 
 // Minecraft configuration:
 loom {
-    log4jConfigs.from(file("log4j2.xml"))
     launchConfigs {
         "client" {
             // If you don't want mixins, remove these lines
@@ -93,10 +92,10 @@ tasks.withType(JavaCompile::class) {
 tasks.withType(Jar::class) {
     archiveBaseName.set(modid)
     manifest.attributes.run {
-        this["FMLCorePluginContainsFMLMod"] = "true"
+        this["ModSide"] = "CLIENT"
+        this["FMLCorePluginContainsFMLMod"] = "Yes, yes it does"
         this["ForceLoadAsMod"] = "true"
-
-        // If you don't want mixins, remove these lines
+        this["TweakOrder"] = 0
         this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
         this["MixinConfigs"] = "mixins.$modid.json"
     }

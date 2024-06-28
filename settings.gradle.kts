@@ -23,4 +23,4 @@ plugins {
 }
 
 
-rootProject.name = "AntimationsMod"
+rootProject.name = "Antimations-mc1.8.9"

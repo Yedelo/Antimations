@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class Antimations {
     public static final String modid = "antimations";
     public static final String name = "Antimations";
-    public static final String version = "2.0.1";
+    public static final String version = "2.0.2";
 
     public static final Minecraft minecraft = Minecraft.getMinecraft();
 

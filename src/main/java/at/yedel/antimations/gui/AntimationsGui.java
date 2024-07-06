@@ -158,7 +158,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 
     @Override
     public void onGuiClosed() {
-        AntimationsConfig.instance.save();
+        AntimationsConfig.getInstance().save();
     }
 
     private void addSettingButtons() {
@@ -171,7 +171,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Creeper Ignition Swings",
                         "Cancel swing animations when igniting a creeper.",
-                        AntimationsConfig.instance.cancelCreeperIgnitionSwings
+                        AntimationsConfig.getInstance().cancelCreeperIgnitionSwings
                 )
         );
         buttonList.add(
@@ -182,7 +182,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Fishing Rod Swings",
                         "Cancel swing animations when using a fishing rod.",
-                        AntimationsConfig.instance.cancelFishingRodSwings
+                        AntimationsConfig.getInstance().cancelFishingRodSwings
                 )
         );
         buttonList.add(
@@ -193,7 +193,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Block Hit Swings",
                         "Cancel swing animations when breaking a block.",
-                        AntimationsConfig.instance.cancelBlockHitSwings
+                        AntimationsConfig.getInstance().cancelBlockHitSwings
                 )
         );
         buttonList.add(
@@ -204,7 +204,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Air or Entity Swings",
                         "Cancel swing animations when swinging at the air or at an entity.",
-                        AntimationsConfig.instance.cancelAirOrEntitySwings
+                        AntimationsConfig.getInstance().cancelAirOrEntitySwings
                 )
         );
         buttonList.add(
@@ -215,7 +215,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Block Interact Swings",
                         "Cancel swing animations when placing or interacting with a block.",
-                        AntimationsConfig.instance.cancelBlockInteractSwings
+                        AntimationsConfig.getInstance().cancelBlockInteractSwings
                 )
         );
         buttonList.add(
@@ -226,7 +226,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Item Use Hand Resets",
                         "Cancel hand position resetting when using items such as eggs or ender pearls.",
-                        AntimationsConfig.instance.cancelItemUseHandResets
+                        AntimationsConfig.getInstance().cancelItemUseHandResets
                 )
         );
         buttonList.add(
@@ -237,7 +237,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Item Consumption Resets",
                         "Cancel hand position resetting when using items such as eggs or ender pearls, \nwhen the stack amount changes.",
-                        AntimationsConfig.instance.cancelItemConsumptionHandResets
+                        AntimationsConfig.getInstance().cancelItemConsumptionHandResets
                 )
         );
         buttonList.add(
@@ -248,7 +248,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Item Update Resets",
                         "Cancel hand position resetting from the item updating. \nWith this, the reequipping animation will only happen if the items themselves are different.",
-                        AntimationsConfig.instance.cancelItemUpdateHandResets
+                        AntimationsConfig.getInstance().cancelItemUpdateHandResets
                 )
         );
         buttonList.add(
@@ -259,7 +259,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Third Person Block Animations",
                         "Cancel third person blocking animations from you and other players.",
-                        AntimationsConfig.instance.cancelThirdPersonBlockAnimations
+                        AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations
                 )
         );
         buttonList.add(
@@ -270,7 +270,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                         225,
                         "Cancel Other Player's Swings",
                         "Cancel all swing animations from other players.",
-                        AntimationsConfig.instance.cancelOtherPlayerSwings
+                        AntimationsConfig.getInstance().cancelOtherPlayerSwings
                 )
         );
     }

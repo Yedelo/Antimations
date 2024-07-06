@@ -17,7 +17,7 @@ public class MixinItemFishingRod {
     @Redirect(method = "onItemRightClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
     public void antimations$onUseFishingRod(EntityPlayer instance) {
         // This happens when you right click with a fishing rod.
-        if (!AntimationsConfig.instance.cancelFishingRodSwings.get()) {
+        if (!AntimationsConfig.getInstance().cancelFishingRodSwings.get()) {
             instance.swingItem();
         }
         else AnimationCanceller.sendAnimationPacket();

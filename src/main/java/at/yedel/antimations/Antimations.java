@@ -7,6 +7,7 @@ import at.yedel.antimations.config.AntimationsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -27,12 +28,12 @@ public class Antimations {
 
     public static final Minecraft minecraft = Minecraft.getMinecraft();
 
-    @Mod.EventHandler
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        AntimationsConfig.instance.setupConfig(event.getSuggestedConfigurationFile());
+        AntimationsConfig.getInstance().setupConfig(event.getSuggestedConfigurationFile());
     }
 
-    @Mod.EventHandler
+    @EventHandler
     public void init(FMLInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new AntimationsCommand());
     }

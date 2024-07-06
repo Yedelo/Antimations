@@ -17,7 +17,7 @@ public class MixinEntityCreeper {
     @Redirect(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
     public void antimations$onIgniteCreeper(EntityPlayer instance) {
         // This happens when you ignite a creeper.
-        if (!AntimationsConfig.instance.cancelCreeperIgnitionSwings.get()) {
+        if (!AntimationsConfig.getInstance().cancelCreeperIgnitionSwings.get()) {
             instance.swingItem();
         }
         else AnimationCanceller.sendAnimationPacket();

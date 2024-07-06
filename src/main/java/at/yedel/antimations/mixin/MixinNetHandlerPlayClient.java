@@ -15,6 +15,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinNetHandlerPlayClient {
     @Redirect(method = "handleAnimation", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityLivingBase;swingItem()V"))
     public void antimations$onOtherPlayerSwings(EntityLivingBase instance) {
-        if (!AntimationsConfig.instance.cancelOtherPlayerSwings.get()) instance.swingItem();
+        if (!AntimationsConfig.getInstance().cancelOtherPlayerSwings.get()) instance.swingItem();
     }
 }

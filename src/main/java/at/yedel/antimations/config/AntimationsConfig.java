@@ -9,7 +9,12 @@ import net.minecraftforge.common.config.Configuration;
 
 
 public class AntimationsConfig {
-    public static AntimationsConfig instance = new AntimationsConfig();
+    private static final AntimationsConfig instance = new AntimationsConfig();
+    
+    public static AntimationsConfig getInstance() {
+        return instance;
+    }
+    
     private Configuration config;
 
     public ToggleObject cancelCreeperIgnitionSwings;

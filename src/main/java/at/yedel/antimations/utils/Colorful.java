@@ -7,7 +7,7 @@ import java.awt.Color;
 
 
 public interface Colorful {
-    final int WHITE = Color.WHITE.getRGB();
-    final int GRAY = Color.GRAY.getRGB();
-    final int DARK_GRAY = Color.DARK_GRAY.getRGB();
+    int WHITE = Color.WHITE.getRGB();
+    int GRAY = Color.GRAY.getRGB();
+    int DARK_GRAY = Color.DARK_GRAY.getRGB();
 }

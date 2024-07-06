@@ -2,7 +2,7 @@
   {
     "modid": "antimations",
     "name": "Antimations",
-    "description": "Cancels swing animations on players and entities. Packets will still be sent so the mod is safe to use for anticheats.\n\nUse /antimations or the config button in the mod list to open the menu.",
+    "description": "Cancels swing animations on players. Packets will still be sent so the mod is safe to use for anticheats.\n\nUse /antimations or the config button in the mod list to open the menu.",
     "version": "${version}",
     "mcversion": "1.8.9",
     "url": "https://modrinth.com/project/antimations",

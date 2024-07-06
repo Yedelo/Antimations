@@ -2,7 +2,6 @@ package at.yedel.antimations.gui;
 
 
 
-import at.yedel.antimations.config.ConfigObject;
 import at.yedel.antimations.config.ToggleObject;
 
 
@@ -41,7 +40,7 @@ public class ToggleButton extends HoverableButton {
         return hoverText;
     }
 
-    public ConfigObject<Boolean> getToggleObject() {
+    public ToggleObject getToggleObject() {
         return toggleObject;
     }
 }

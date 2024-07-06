@@ -8,6 +8,7 @@
     "MixinItemFishingRod",
     "MixinItemRenderer",
     "MixinMinecraft",
-    "MixinNetHandlerPlayClient"
+    "MixinNetHandlerPlayClient",
+    "MixinRenderPlayer"
   ]
 }

@@ -9,10 +9,8 @@ import java.net.URI;
 import at.yedel.antimations.Antimations;
 import at.yedel.antimations.config.AntimationsConfig;
 import at.yedel.antimations.utils.Colorful;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.realms.RealmsSharedConstants;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
@@ -31,6 +29,8 @@ public class AntimationsGui extends GuiScreen implements Colorful {
     private ToggleButton[] toggles;
     private HoverableButton[] hoverables;
 
+    private int buttonId;
+
     private ToggleButton cancelCreeperIgnitionSwings;
     private ToggleButton cancelFishingRodSwings;
     private ToggleButton cancelBlockHitSwings;
@@ -39,6 +39,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
     private ToggleButton cancelItemUseHandResets;
     private ToggleButton cancelItemConsumptionHandResets;
     private ToggleButton cancelItemUpdateHandResets;
+    private ToggleButton cancelThirdPersonBlockAnimations;
     private ToggleButton cancelOtherPlayerSwings;
 
     private IconButton modrinthButton;
@@ -58,11 +59,12 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 
     @Override
     public void initGui() {
+        buttonId = 0;
         midpoint = width / 2;
         addSettingButtons();
-        this.buttonList.add(modrinthButton = new IconButton(9, midpoint - 12 - 30 , 25, 25, 25, new ResourceLocation("antimations", "modrinth.png"), "Click to open the Modrinth page for this mod."));
-        this.buttonList.add(githubButton = new IconButton(10, midpoint - 12, 25, 25, 25, new ResourceLocation("antimations", "github.png"), "Click to open the GitHub repository for this mod."));
-        this.buttonList.add(discordButton = new IconButton(11, midpoint - 12 + 30, 25, 25, 25, new ResourceLocation("antimations", "discord.png"), "Discord: yedel"));
+        this.buttonList.add(modrinthButton = new IconButton(buttonId ++, midpoint - 12 - 30 , 25, 25, 25, new ResourceLocation("antimations", "modrinth.png"), "Click to open the Modrinth page for this mod."));
+        this.buttonList.add(githubButton = new IconButton(buttonId ++, midpoint - 12, 25, 25, 25, new ResourceLocation("antimations", "github.png"), "Click to open the GitHub repository for this mod."));
+        this.buttonList.add(discordButton = new IconButton(buttonId ++, midpoint - 12 + 30, 25, 25, 25, new ResourceLocation("antimations", "discord.png"), "Discord: yedel"));
         toggles = new ToggleButton[] {
             cancelCreeperIgnitionSwings,
             cancelFishingRodSwings,
@@ -72,6 +74,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
             cancelItemUseHandResets,
             cancelItemConsumptionHandResets,
             cancelItemUpdateHandResets,
+            cancelThirdPersonBlockAnimations,
             cancelOtherPlayerSwings
         };
         hoverables = new HoverableButton[] {
@@ -87,12 +90,13 @@ public class AntimationsGui extends GuiScreen implements Colorful {
             cancelItemUseHandResets,
             cancelItemConsumptionHandResets,
             cancelItemUpdateHandResets,
+            cancelThirdPersonBlockAnimations,
             cancelOtherPlayerSwings
         };
-        this.buttonList.add(enableAllButton = new GuiButton(13, midpoint - 132, height - 50, 85, 20, "§aEnable All"));
-        this.buttonList.add(disableAllButton = new GuiButton(14, midpoint - 42, height - 50, 85, 20, "§cDisable All"));
-        this.buttonList.add(resetButton = new GuiButton(15, midpoint + 48, height - 50, 85, 20, "Reset"));
-        this.buttonList.add(doneButton = new GuiButton(16, midpoint - 75, height - 25, 150, 20, "Done"));
+        this.buttonList.add(enableAllButton = new GuiButton(buttonId ++, midpoint - 132, height - 50, 85, 20, "§aEnable All"));
+        this.buttonList.add(disableAllButton = new GuiButton(buttonId ++, midpoint - 42, height - 50, 85, 20, "§cDisable All"));
+        this.buttonList.add(resetButton = new GuiButton(buttonId ++, midpoint + 48, height - 50, 85, 20, "Reset"));
+        this.buttonList.add(doneButton = new GuiButton(buttonId ++, midpoint - 75, height - 25, 150, 20, "Done"));
         versionString = "v" + Antimations.version + "-" + RealmsSharedConstants.VERSION_STRING;
     }
 
@@ -161,7 +165,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         int buttonX = midpoint - 112;
         buttonList.add(
                 cancelCreeperIgnitionSwings = new ToggleButton(
-                        0,
+                        buttonId ++,
                         buttonX,
                         55,
                         225,
@@ -172,7 +176,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         );
         buttonList.add(
                 cancelFishingRodSwings = new ToggleButton(
-                        1,
+                        buttonId ++,
                         buttonX,
                         80,
                         225,
@@ -183,7 +187,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         );
         buttonList.add(
                 cancelBlockHitSwings = new ToggleButton(
-                        2,
+                        buttonId ++,
                         buttonX,
                         105,
                         225,
@@ -194,7 +198,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         );
         buttonList.add(
                 cancelAirOrEntitySwings = new ToggleButton(
-                        3,
+                        buttonId ++,
                         buttonX,
                         130,
                         225,
@@ -205,7 +209,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         );
         buttonList.add(
                 cancelBlockInteractSwings = new ToggleButton(
-                        4,
+                        buttonId ++,
                         buttonX,
                         155,
                         225,
@@ -216,7 +220,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         );
         buttonList.add(
                 cancelItemUseHandResets = new ToggleButton(
-                        5,
+                        buttonId ++,
                         buttonX,
                         180,
                         225,
@@ -227,7 +231,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         );
         buttonList.add(
                 cancelItemConsumptionHandResets = new ToggleButton(
-                        6,
+                        buttonId ++,
                         buttonX,
                         205,
                         225,
@@ -238,7 +242,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         );
         buttonList.add(
                 cancelItemUpdateHandResets = new ToggleButton(
-                        7,
+                        buttonId ++,
                         buttonX,
                         230,
                         225,
@@ -248,10 +252,21 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                 )
         );
         buttonList.add(
-                cancelOtherPlayerSwings = new ToggleButton(
-                        8,
+                cancelThirdPersonBlockAnimations = new ToggleButton(
+                        buttonId ++,
                         buttonX,
                         255,
+                        225,
+                        "Cancel Third Person Block Animations",
+                        "Cancel third person blocking animations from you and other players.",
+                        AntimationsConfig.instance.cancelThirdPersonBlockAnimations
+                )
+        );
+        buttonList.add(
+                cancelOtherPlayerSwings = new ToggleButton(
+                        buttonId ++,
+                        buttonX,
+                        280,
                         225,
                         "Cancel Other Player's Swings",
                         "Cancel all swing animations from other players.",

@@ -20,6 +20,7 @@ public class AntimationsConfig {
     public ToggleObject cancelItemUseHandResets;
     public ToggleObject cancelItemConsumptionHandResets;
     public ToggleObject cancelItemUpdateHandResets;
+    public ToggleObject cancelThirdPersonBlockAnimations;
     public ToggleObject cancelOtherPlayerSwings;
 
     public void setupConfig(File recommendedConfigFile) {
@@ -33,6 +34,7 @@ public class AntimationsConfig {
         cancelItemUseHandResets = new ToggleObject(config, getValue("cancelItemUseHandResets", true), "cancelItemUseHandResets", true);
         cancelItemConsumptionHandResets = new ToggleObject(config, getValue("cancelItemConsumptionHandResets", true), "cancelItemConsumptionHandResets", true);
         cancelItemUpdateHandResets = new ToggleObject(config, getValue("cancelItemUpdateHandResets", true), "cancelItemUpdateHandResets", true);
+        cancelThirdPersonBlockAnimations = new ToggleObject(config, getValue("cancelThirdPersonBlockAnimations", false), "cancelThirdPersonBlockAnimations", false);
         cancelOtherPlayerSwings = new ToggleObject(config, getValue("cancelOtherPlayerSwings", false), "cancelOtherPlayerSwings", false);
         if (config.hasChanged()) config.save();
     }

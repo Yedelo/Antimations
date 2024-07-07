@@ -39,11 +39,13 @@ public class AntimationsGui extends GuiScreen implements Colorful {
     private ToggleButton cancelItemUseHandResets;
     private ToggleButton cancelItemConsumptionHandResets;
     private ToggleButton cancelItemUpdateHandResets;
+    private ToggleButton cancelOwnBlockAnimations;
     private ToggleButton cancelThirdPersonBlockAnimations;
     private ToggleButton cancelOtherPlayerSwings;
 
     private IconButton modrinthButton;
     private IconButton githubButton;
+    @SuppressWarnings("FieldCanBeLocal")
     private IconButton discordButton;
 
     private final URI modrinthUri = URI.create("https://modrinth.com/project/antimations");
@@ -74,6 +76,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
             cancelItemUseHandResets,
             cancelItemConsumptionHandResets,
             cancelItemUpdateHandResets,
+            cancelOwnBlockAnimations,
             cancelThirdPersonBlockAnimations,
             cancelOtherPlayerSwings
         };
@@ -90,6 +93,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
             cancelItemUseHandResets,
             cancelItemConsumptionHandResets,
             cancelItemUpdateHandResets,
+            cancelOwnBlockAnimations,
             cancelThirdPersonBlockAnimations,
             cancelOtherPlayerSwings
         };
@@ -252,9 +256,20 @@ public class AntimationsGui extends GuiScreen implements Colorful {
                 )
         );
         buttonList.add(
-                cancelThirdPersonBlockAnimations = new ToggleButton(
+                cancelOwnBlockAnimations = new ToggleButton(
                         buttonId ++,
                         buttonX,
+                        255,
+                        225,
+                        "Cancel Own Block Animations",
+                        "Cancel your own block animations in first person",
+                        AntimationsConfig.getInstance().cancelOwnBlockAnimations
+                )
+        );
+        buttonList.add(
+                cancelThirdPersonBlockAnimations = new ToggleButton(
+                        buttonId ++,
+                        buttonX + 230,
                         255,
                         225,
                         "Cancel Third Person Block Animations",

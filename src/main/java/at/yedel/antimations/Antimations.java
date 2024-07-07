@@ -6,6 +6,7 @@ import at.yedel.antimations.config.AntimationsCommand;
 import at.yedel.antimations.config.AntimationsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -33,8 +34,43 @@ public class Antimations {
         AntimationsConfig.getInstance().setupConfig(event.getSuggestedConfigurationFile());
     }
 
+    private boolean isOverflowAnimationsLoaded;
+    private boolean isSk1erAnimationsLoaded;
+    private boolean isOrangeAnimationsLoaded;
+    private boolean isSpiderfrogAnimationsLoaded;
+
+    public boolean isOverflowAnimationsLoaded() {
+        return isOverflowAnimationsLoaded;
+    }
+
+    public boolean isSk1erAnimationsLoaded() {
+        return isSk1erAnimationsLoaded;
+    }
+
+    public boolean isOrangeAnimationsLoaded() {
+        return isOrangeAnimationsLoaded;
+    }
+
+    public boolean isSpiderfrogAnimationsLoaded() {
+        return isSpiderfrogAnimationsLoaded;
+    }
+
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new AntimationsCommand());
+        isOverflowAnimationsLoaded = Loader.isModLoaded("overflowanimations");
+        isSk1erAnimationsLoaded = Loader.isModLoaded("sk1er_old_animations");
+        isOrangeAnimationsLoaded = Loader.isModLoaded("animations");
+        isSpiderfrogAnimationsLoaded = doesClassExist("com.spiderfrog.oldanimations.OldAnimationsMod");
+    }
+
+    private boolean doesClassExist(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        }
+        catch (ClassNotFoundException e) {
+            return false;
+        }
     }
 }

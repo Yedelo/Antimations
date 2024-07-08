@@ -11,6 +11,10 @@ public class ToggleObject extends ConfigObject<Boolean> {
         super(config, variable, variableName, defaultValue);
     }
 
+    public void save(Boolean newValue) {
+        config.get(Configuration.CATEGORY_GENERAL, variableName, defaultValue).set(newValue);
+    }
+
     public String getToggleText() {
         if (get()) return "§aEnabled";
         else return "§cDisabled";

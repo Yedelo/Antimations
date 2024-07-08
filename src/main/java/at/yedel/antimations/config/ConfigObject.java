@@ -6,11 +6,11 @@ import net.minecraftforge.common.config.Configuration;
 
 
 
-public class ConfigObject<T> {
-    private final Configuration config;
+public abstract class ConfigObject<T> {
+    protected final Configuration config;
     private T variable;
-    private final String variableName;
-    private final T defaultValue;
+    protected final String variableName;
+    protected final T defaultValue;
     public ConfigObject(Configuration config, T variable, String variableName, T defaultValue) {
         this.config = config;
         this.variable = variable;
@@ -24,10 +24,10 @@ public class ConfigObject<T> {
 
     public void set(T newValue) {
         variable = newValue;
-        if (defaultValue instanceof Boolean && newValue instanceof Boolean) {
-            config.get(Configuration.CATEGORY_GENERAL, variableName, (Boolean) defaultValue).set((Boolean) newValue);
-        }
+        save(newValue);
     }
+
+    abstract void save(T newValue);
 
     public T getDefaultValue() {
         return defaultValue;

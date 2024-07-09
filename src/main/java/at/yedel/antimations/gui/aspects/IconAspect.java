@@ -1,18 +1,19 @@
-package at.yedel.antimations.gui;
+package at.yedel.antimations.gui.aspects;
 
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 
 
-public class IconButton extends HoverableButton {
+public class IconAspect extends GuiButton implements HoverableAspect {
     public final ResourceLocation iconLocation;
     private final String hoverText;
 
-    public IconButton(int buttonId, int x, int y, int width, int height, ResourceLocation iconLocation, String hoverText) {
+    public IconAspect(int buttonId, int x, int y, int width, int height, ResourceLocation iconLocation, String hoverText) {
         super(buttonId, x, y, width, height, "");
         this.iconLocation = iconLocation;
         this.hoverText = hoverText;
@@ -24,11 +25,16 @@ public class IconButton extends HoverableButton {
         // credits sba and biscuit. without this the color of the icons depends on the last options (color codes i think)
         GlStateManager.color(1F, 1F, 1F, 1F);
         drawModalRectWithCustomSizedTexture(xPosition, yPosition, 0, 0, width, height, width, height);
-        this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+        hovered = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
     }
 
     @Override
     public String getHoverText() {
         return hoverText;
+    }
+
+    @Override
+    public boolean isHovered() {
+        return hovered;
     }
 }

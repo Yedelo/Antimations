@@ -30,7 +30,7 @@ public abstract class MixinItemRenderer {
         }
         else {
             if (slotChanged) return true;
-            return this.itemRenderer.getItemModelMesher().getItemModel(oldStack) == this.itemRenderer.getItemModelMesher().getItemModel(newStack);
+            return itemRenderer.getItemModelMesher().getItemModel(oldStack) == itemRenderer.getItemModelMesher().getItemModel(newStack);
         }
     }
 

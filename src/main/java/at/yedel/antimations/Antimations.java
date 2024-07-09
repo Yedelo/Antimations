@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         modid = Antimations.modid,
         name = Antimations.name,
         version = Antimations.version,
-        guiFactory = "at.yedel.antimations.gui.AntimationsGuiFactory"
+        guiFactory = "at.yedel.antimations.utils.AntimationsGuiFactory"
 )
 public class Antimations {
     public static final String modid = "antimations";

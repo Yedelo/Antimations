@@ -54,11 +54,15 @@ public class AntimationsGui extends GuiScreen implements Colorful {
     public void initGui() {
         buttonId = 0;
         midpoint = width / 2;
+        IconAspect discordButton;
         buttonList.add(modrinthButton = new IconAspect(buttonId ++, midpoint - 12 - 30, 25, 25, 25, new ResourceLocation("antimations", "modrinth.png"), "Click to open the Modrinth page for this mod."));
         buttonList.add(githubButton = new IconAspect(buttonId ++, midpoint - 12, 25, 25, 25, new ResourceLocation("antimations", "github.png"), "Click to open the GitHub repository for this mod."));
-        buttonList.add(new IconAspect(buttonId ++, midpoint - 12 + 30, 25, 25, 25, new ResourceLocation("antimations", "discord.png"), "Discord: yedel"));
+        buttonList.add(discordButton = new IconAspect(buttonId ++, midpoint - 12 + 30, 25, 25, 25, new ResourceLocation("antimations", "discord.png"), "Discord: yedel"));
+        addSettingAspects();
         hoverableAspects = new HoverableAspect[] {
-
+            modrinthButton,
+            githubButton,
+            discordButton
         };
         buttonList.add(resetButton = new GuiButton(buttonId ++, midpoint - 42, height - 50, 85, 20, "Reset"));
         buttonList.add(doneButton = new GuiButton(buttonId ++, midpoint - 75, height - 25, 150, 20, "Done"));

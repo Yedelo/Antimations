@@ -93,7 +93,9 @@ public class AntimationsGui extends GuiScreen implements Colorful {
         }
 
         else if (button == resetButton) {
-
+            for (ConfigAspect configAspect: configAspects) {
+                configAspect.onReset();
+            }
         }
         else if (button == doneButton) {
             mc.displayGuiScreen(parentScreen);

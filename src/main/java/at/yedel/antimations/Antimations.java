@@ -2,6 +2,9 @@ package at.yedel.antimations;
 
 
 
+import java.io.File;
+import java.net.URI;
+
 import at.yedel.antimations.config.AntimationsCommand;
 import at.yedel.antimations.config.AntimationsConfig;
 import net.minecraft.client.Minecraft;
@@ -10,6 +13,7 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -31,9 +35,24 @@ public class Antimations {
 
     public static final Minecraft minecraft = Minecraft.getMinecraft();
 
+    @Instance
+    private static Antimations instance;
+
+    public static Antimations getInstance() {
+        return instance;
+    }
+
+    private URI suggestedConfigurationURI;
+
+    public URI getSuggestedConfigurationURI() {
+        return suggestedConfigurationURI;
+    }
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        AntimationsConfig.getInstance().setupConfig(event.getSuggestedConfigurationFile());
+        File suggestedConfigurationFile = event.getSuggestedConfigurationFile();
+        suggestedConfigurationURI = suggestedConfigurationFile.toURI();
+        AntimationsConfig.getInstance().setupConfig(suggestedConfigurationFile);
     }
 
     @EventHandler

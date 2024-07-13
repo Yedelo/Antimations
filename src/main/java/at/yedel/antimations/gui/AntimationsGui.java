@@ -44,10 +44,11 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 	private ConfigPage swingCustomizationPage = new ConfigPage("Swing Customization", swingCustomizationAspects);
 	private ConfigPage itemResetPage = new ConfigPage("Item Reset Customizaion", itemResetAspects);
 	private ConfigPage otherPage = new ConfigPage("Other", otherAspects);
-	private FlowArrayList<ConfigPage> configPages = new FlowArrayList();
+	private FlowArrayList<ConfigPage> configPages = new FlowArrayList<>();
 	private ConfigPage currentConfigPage;
 	private GuiButton resetButton;
 	private GuiButton doneButton;
+	private GuiButton openConfigFileButton;
 
 	public AntimationsGui(GuiScreen parentScreen) {
 		this.parentScreen = parentScreen;
@@ -68,7 +69,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		setupConfigAspects();
 		setupConfigPages();
 
-		hoverableAspects = new ArrayList();
+		hoverableAspects = new ArrayList<>();
 		hoverableAspects.add(modrinthButton);
 		hoverableAspects.add(githubButton);
 		hoverableAspects.add(discordButton);
@@ -81,6 +82,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 
 		buttonList.add(resetButton = new GuiButton(buttonId ++, midpoint - 42, height - 50, 85, 20, "Reset"));
 		buttonList.add(doneButton = new GuiButton(buttonId ++, midpoint - 75, height - 25, 150, 20, "Done"));
+		buttonList.add(openConfigFileButton = new GuiButton(buttonId ++, width - 105, height - 25, 100, 20, "Open Config File"));
 
 		currentConfigPage = configPages.get(0);
 	}
@@ -113,10 +115,10 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 			Desktop.getDesktop().browse(githubUri);
 		}
 		else if (button == previousPageButton) {
-			currentConfigPage = configPages.getPreviousElement(currentConfigPage);
+			goToPreviousPage();
 		}
 		else if (button == nextPageButton) {
-			currentConfigPage = configPages.getNextElement(currentConfigPage);
+			goToNextPage();
 		}
 		else if (button == resetButton) {
 			if (Objects.equals(button.displayString, "Reset")) {
@@ -131,6 +133,9 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		else if (button == doneButton) {
 			mc.displayGuiScreen(parentScreen);
 		}
+		else if (button == openConfigFileButton) {
+			Desktop.getDesktop().browse(Antimations.getInstance().getSuggestedConfigurationURI());
+		}
 	}
 
 	@Override
@@ -141,12 +146,24 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) {
-		if (keyCode == Keyboard.KEY_ESCAPE) mc.displayGuiScreen(parentScreen);
+		switch (keyCode) {
+			case (Keyboard.KEY_ESCAPE): mc.displayGuiScreen(parentScreen); break;
+			case (Keyboard.KEY_LEFT): goToPreviousPage(); break;
+			case (Keyboard.KEY_RIGHT): goToNextPage();
+		}
 	}
 
 	@Override
 	public void onGuiClosed() {
 		AntimationsConfig.getInstance().save();
+	}
+
+	private void goToPreviousPage() {
+		currentConfigPage = configPages.getPreviousElement(currentConfigPage);
+	}
+
+	private void goToNextPage() {
+		currentConfigPage = configPages.getNextElement(currentConfigPage);
 	}
 
 	// Stuff is moved into functions at the bottom to make it so that code above this comment doesn't have to be updated for new features

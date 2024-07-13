@@ -9,7 +9,7 @@ import net.minecraftforge.common.config.Configuration;
 
 
 public class AntimationsConfig {
-    private static final AntimationsConfig instance = new AntimationsConfig();
+    private static AntimationsConfig instance = new AntimationsConfig();
     
     public static AntimationsConfig getInstance() {
         return instance;
@@ -22,27 +22,33 @@ public class AntimationsConfig {
     public ToggleObject cancelBlockHitSwings; // might be confusing, not blockhitting but when you hit a block
     public ToggleObject cancelAirOrEntitySwings;
     public ToggleObject cancelBlockInteractSwings;
+    public ToggleObject cancelOtherPlayerSwings;
+
     public ToggleObject cancelItemUseHandResets;
     public ToggleObject cancelItemConsumptionHandResets;
     public ToggleObject cancelItemUpdateHandResets;
+
     public ToggleObject cancelOwnBlockAnimations;
     public ToggleObject cancelThirdPersonBlockAnimations;
-    public ToggleObject cancelOtherPlayerSwings;
 
     public void setupConfig(File recommendedConfigFile) {
         config = new Configuration(recommendedConfigFile);
         config.load();
+
         cancelCreeperIgnitionSwings = new ToggleObject(config, getValue("cancelCreeperIgnitionSwings", true), "cancelCreeperIgnitionSwings", true);
         cancelFishingRodSwings = new ToggleObject(config, getValue("cancelFishingRodSwings", true), "cancelFishingRodSwings", true);
         cancelBlockHitSwings = new ToggleObject(config, getValue("cancelBlockHitSwings", true), "cancelBlockHitSwings", true);
         cancelAirOrEntitySwings = new ToggleObject(config, getValue("cancelAirOrEntitySwings", true), "cancelAirOrEntitySwings", true);
         cancelBlockInteractSwings = new ToggleObject(config, getValue("cancelBlockInteractSwings", true), "cancelBlockInteractSwings", true);
+        cancelOtherPlayerSwings = new ToggleObject(config, getValue("cancelOtherPlayerSwings", false), "cancelOtherPlayerSwings", false);
+
         cancelItemUseHandResets = new ToggleObject(config, getValue("cancelItemUseHandResets", true), "cancelItemUseHandResets", true);
         cancelItemConsumptionHandResets = new ToggleObject(config, getValue("cancelItemConsumptionHandResets", true), "cancelItemConsumptionHandResets", true);
         cancelItemUpdateHandResets = new ToggleObject(config, getValue("cancelItemUpdateHandResets", true), "cancelItemUpdateHandResets", true);
+
         cancelOwnBlockAnimations = new ToggleObject(config, getValue("cancelOwnBlockAnimations", false), "cancelOwnBlockAnimations", false);
         cancelThirdPersonBlockAnimations = new ToggleObject(config, getValue("cancelThirdPersonBlockAnimations", false), "cancelThirdPersonBlockAnimations", false);
-        cancelOtherPlayerSwings = new ToggleObject(config, getValue("cancelOtherPlayerSwings", false), "cancelOtherPlayerSwings", false);
+
         if (config.hasChanged()) config.save();
     }
 

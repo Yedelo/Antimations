@@ -19,8 +19,10 @@ public class AntimationsGuiFactory implements IModGuiFactory {
         return AntimationsGui.class;
     }
 
+    @Override
     public void initialize(Minecraft minecraft) {}
 
+    @Override
     public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
         return Collections.emptySet();
     }

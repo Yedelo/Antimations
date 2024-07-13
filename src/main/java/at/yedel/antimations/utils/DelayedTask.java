@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
 public class DelayedTask {
     private int counter;
-    private final Runnable runnable;
+    private Runnable runnable;
 
     public DelayedTask(Runnable runnable) {
         counter = 0;

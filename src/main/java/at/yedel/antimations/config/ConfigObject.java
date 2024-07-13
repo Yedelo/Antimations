@@ -7,10 +7,10 @@ import net.minecraftforge.common.config.Configuration;
 
 
 public abstract class ConfigObject<T> {
-    protected final Configuration config;
+    protected Configuration config;
     private T variable;
-    protected final String variableName;
-    protected final T defaultValue;
+    protected String variableName;
+    protected T defaultValue;
     public ConfigObject(Configuration config, T variable, String variableName, T defaultValue) {
         this.config = config;
         this.variable = variable;
@@ -28,8 +28,4 @@ public abstract class ConfigObject<T> {
     }
 
     abstract void save(T newValue);
-
-    public T getDefaultValue() {
-        return defaultValue;
-    }
 }

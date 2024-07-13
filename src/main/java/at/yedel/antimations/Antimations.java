@@ -5,6 +5,7 @@ package at.yedel.antimations;
 import at.yedel.antimations.config.AntimationsCommand;
 import at.yedel.antimations.config.AntimationsConfig;
 import net.minecraft.client.Minecraft;
+import net.minecraft.realms.RealmsSharedConstants;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +27,7 @@ public class Antimations {
     public static final String modid = "antimations";
     public static final String name = "Antimations";
     public static final String version = "2.0.2";
+    public static final String totalVersionString = "v" + version + "-" + RealmsSharedConstants.VERSION_STRING;
 
     public static final Minecraft minecraft = Minecraft.getMinecraft();
 
@@ -34,34 +36,13 @@ public class Antimations {
         AntimationsConfig.getInstance().setupConfig(event.getSuggestedConfigurationFile());
     }
 
-    private boolean isOverflowAnimationsLoaded;
-    private boolean isSk1erAnimationsLoaded;
-    private boolean isOrangeAnimationsLoaded;
-    private boolean isSpiderfrogAnimationsLoaded;
-
-    public boolean isOverflowAnimationsLoaded() {
-        return isOverflowAnimationsLoaded;
-    }
-
-    public boolean isSk1erAnimationsLoaded() {
-        return isSk1erAnimationsLoaded;
-    }
-
-    public boolean isOrangeAnimationsLoaded() {
-        return isOrangeAnimationsLoaded;
-    }
-
-    public boolean isSpiderfrogAnimationsLoaded() {
-        return isSpiderfrogAnimationsLoaded;
-    }
-
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new AntimationsCommand());
-        isOverflowAnimationsLoaded = Loader.isModLoaded("overflowanimations");
-        isSk1erAnimationsLoaded = Loader.isModLoaded("sk1er_old_animations");
-        isOrangeAnimationsLoaded = Loader.isModLoaded("animations");
-        isSpiderfrogAnimationsLoaded = doesClassExist("com.spiderfrog.oldanimations.OldAnimationsMod");
+        boolean isOverflowAnimationsLoaded = Loader.isModLoaded("overflowanimations");
+        boolean isSk1erAnimationsLoaded = Loader.isModLoaded("sk1er_old_animations");
+        boolean isOrangeAnimationsLoaded = Loader.isModLoaded("animations");
+        boolean isSpiderfrogAnimationsLoaded = doesClassExist("com.spiderfrog.oldanimations.OldAnimationsMod");
     }
 
     private boolean doesClassExist(String className) {

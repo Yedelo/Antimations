@@ -28,6 +28,7 @@ public class ToggleObject extends ConfigObject<Boolean> {
         set(defaultValue);
     }
 
+    @Override
     public void save(Boolean newValue) {
         config.get(Configuration.CATEGORY_GENERAL, variableName, defaultValue).set(newValue);
     }

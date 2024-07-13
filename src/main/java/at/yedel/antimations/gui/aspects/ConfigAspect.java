@@ -1,6 +1,7 @@
 package at.yedel.antimations.gui.aspects;
 
 public interface ConfigAspect {
-    void onClick();
+    void render(int mouseX, int mouseY);
+    boolean onClick(int mouseX, int mouseY, int mouseButton);
     void onReset();
 }

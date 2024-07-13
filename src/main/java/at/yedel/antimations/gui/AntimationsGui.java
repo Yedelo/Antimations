@@ -280,6 +280,17 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				"Cancel your hand doing the re-equip animation when your item updates (durability, lore...)."
 			)
 		);
+		itemResetAspects.add(
+			new ToggleAspect(
+				buttonId ++,
+				midpoint - 112,
+				140,
+				225,
+				AntimationsConfig.getInstance().cancelAllHandResets,
+				"Cancel All Hand Resets",
+				"Always cancel your hand doing the re-equip animation."
+			)
+		);
 	}
 
 	private void setupOtherAspects() {

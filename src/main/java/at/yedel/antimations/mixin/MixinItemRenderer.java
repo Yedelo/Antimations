@@ -25,7 +25,8 @@ public abstract class MixinItemRenderer {
 
     @Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;shouldCauseReequipAnimation(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Z)Z"))
     public boolean antimations$simplifyEqual(Item instance, ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        if (!AntimationsConfig.getInstance().cancelItemUpdateHandResets.get()) {
+        if (AntimationsConfig.getInstance().cancelAllHandResets.get()) return false;
+        else if (!AntimationsConfig.getInstance().cancelItemUpdateHandResets.get()) {
             return instance.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
         }
         else {

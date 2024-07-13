@@ -91,7 +91,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj, "Antimations " + Antimations.version + " by Yedel", midpoint, 5, WHITE);
-		drawHorizontalLine(80, width - 80, 45, GRAY);
+		drawHorizontalLine(175, width - 175, 45, GRAY);
 		drawCenteredString(fontRendererObj, currentConfigPage.getTitle(), midpoint, 50, WHITE);
 		drawString(fontRendererObj, Antimations.totalVersionString, 5, height - fontRendererObj.FONT_HEIGHT - 5, GRAY);
 		for (GuiButton button: buttonList) {
@@ -103,7 +103,6 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				drawCreativeTabHoveringText(hoverableAspect.getHoverText(), mouseX, mouseY);
 			}
 		}
-		drawString(fontRendererObj, "(" + mouseX + ", " + mouseY + ")", mouseX, mouseY, WHITE);
 	}
 
 	@Override
@@ -115,10 +114,10 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 			Desktop.getDesktop().browse(githubUri);
 		}
 		else if (button == previousPageButton) {
-			goToPreviousPage();
+			currentConfigPage = configPages.getPreviousElement(currentConfigPage);
 		}
 		else if (button == nextPageButton) {
-			goToNextPage();
+			currentConfigPage = configPages.getNextElement(currentConfigPage);
 		}
 		else if (button == resetButton) {
 			if (Objects.equals(button.displayString, "Reset")) {
@@ -146,24 +145,14 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) {
-		switch (keyCode) {
-			case (Keyboard.KEY_ESCAPE): mc.displayGuiScreen(parentScreen); break;
-			case (Keyboard.KEY_LEFT): goToPreviousPage(); break;
-			case (Keyboard.KEY_RIGHT): goToNextPage();
+		if (keyCode == Keyboard.KEY_ESCAPE) {
+			mc.displayGuiScreen(parentScreen);
 		}
 	}
 
 	@Override
 	public void onGuiClosed() {
 		AntimationsConfig.getInstance().save();
-	}
-
-	private void goToPreviousPage() {
-		currentConfigPage = configPages.getPreviousElement(currentConfigPage);
-	}
-
-	private void goToNextPage() {
-		currentConfigPage = configPages.getNextElement(currentConfigPage);
 	}
 
 	// Stuff is moved into functions at the bottom to make it so that code above this comment doesn't have to be updated for new features

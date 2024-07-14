@@ -6,5 +6,5 @@ Cancels swing animations on players. Packets will still be sent so the mod is sa
 
 Use /antimations or the config button in the mod list to open the menu.
 
-![image of the config](src/main/resources/configImage.png)
+![image of the config](configImage.png)
 

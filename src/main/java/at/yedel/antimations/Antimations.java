@@ -12,6 +12,7 @@ import at.yedel.antimations.gui.AntimationsGui;
 import at.yedel.antimations.utils.AntimationsPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.realms.RealmsSharedConstants;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
@@ -57,6 +58,8 @@ public class Antimations {
         return suggestedConfigurationURI;
     }
 
+    public static ItemModelMesher itemModelMesher;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         File suggestedConfigurationFile = event.getSuggestedConfigurationFile();
@@ -72,6 +75,7 @@ public class Antimations {
         boolean isSk1erAnimationsLoaded = Loader.isModLoaded("sk1er_old_animations");
         boolean isOrangeAnimationsLoaded = Loader.isModLoaded("animations");
         boolean isSpiderfrogAnimationsLoaded = doesClassExist("com.spiderfrog.oldanimations.OldAnimationsMod");
+        itemModelMesher = minecraft.getRenderItem().getItemModelMesher();
     }
 
     @SubscribeEvent

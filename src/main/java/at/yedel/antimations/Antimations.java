@@ -4,13 +4,18 @@ package at.yedel.antimations;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Objects;
 
 import at.yedel.antimations.config.AntimationsCommand;
 import at.yedel.antimations.config.AntimationsConfig;
+import at.yedel.antimations.gui.AntimationsGui;
 import at.yedel.antimations.utils.AntimationsPacketHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.realms.RealmsSharedConstants;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
+import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -72,6 +77,20 @@ public class Antimations {
     @SubscribeEvent
     public void onServerConnect(ClientConnectedToServerEvent event) {
         event.manager.channel().pipeline().addBefore("packet_handler", "antimations_packet_handler", new AntimationsPacketHandler());
+    }
+
+    @SubscribeEvent
+    public void onOpenAnimationGUI(InitGuiEvent event) {
+        if (Objects.equals(event.gui.getClass().getName(), "net.optifine.gui.GuiAnimationSettingsOF")) {
+            event.buttonList.add(new GuiButton(2000, event.gui.width / 2 - 75, event.gui.height - 25, 150, 20, "Open Antimations Settings"));
+        }
+    }
+
+    @SubscribeEvent
+    public void onClickAntimationsButton(ActionPerformedEvent event) {
+        if (Objects.equals(event.button.displayString, "Open Antimations Settings")) {
+            minecraft.displayGuiScreen(new AntimationsGui(event.gui));
+        }
     }
 
     private boolean doesClassExist(String className) {

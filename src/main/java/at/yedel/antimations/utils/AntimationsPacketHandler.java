@@ -17,7 +17,7 @@ public class AntimationsPacketHandler extends ChannelDuplexHandler {
 			if (
 				((S0BPacketAnimation) msg).getAnimationType() == 0
 				&&
-				AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations.get()
+				AntimationsConfig.getInstance().cancelOtherPlayerSwings.get()
 			) return;
 		}
 		super.channelRead(ctx, msg);

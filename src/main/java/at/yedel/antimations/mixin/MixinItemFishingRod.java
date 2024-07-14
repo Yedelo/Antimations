@@ -16,10 +16,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinItemFishingRod {
     @Redirect(method = "onItemRightClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
     public void antimations$onUseFishingRod(EntityPlayer instance) {
-        // This happens when you right click with a fishing rod.
-        if (!AntimationsConfig.getInstance().cancelFishingRodSwings.get()) {
-            instance.swingItem();
+        if (AntimationsConfig.getInstance().cancelFishingRodSwings.get()) {
+            AnimationCanceller.sendAnimationPacket();
         }
-        else AnimationCanceller.sendAnimationPacket();
+        else instance.swingItem();
     }
 }

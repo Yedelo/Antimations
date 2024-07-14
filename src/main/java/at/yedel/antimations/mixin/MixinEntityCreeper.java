@@ -13,13 +13,12 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 
 @Mixin(EntityCreeper.class)
-public class MixinEntityCreeper {
+public abstract class MixinEntityCreeper {
     @Redirect(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
     public void antimations$onIgniteCreeper(EntityPlayer instance) {
-        // This happens when you ignite a creeper.
-        if (!AntimationsConfig.getInstance().cancelCreeperIgnitionSwings.get()) {
-            instance.swingItem();
+        if (AntimationsConfig.getInstance().cancelCreeperIgnitionSwings.get()) {
+            AnimationCanceller.sendAnimationPacket();
         }
-        else AnimationCanceller.sendAnimationPacket();
+        else instance.swingItem();
     }
 }

@@ -15,5 +15,4 @@ public class AnimationCanceller {
     public static void sendAnimationPacket() {
         minecraft.getNetHandler().addToSendQueue(new C0APacketAnimation());
     }
-    // In the case of ItemRenderer.resetEquippedProgress*(), its only rendering so it doesn't matter
 }

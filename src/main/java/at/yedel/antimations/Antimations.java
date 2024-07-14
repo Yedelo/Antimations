@@ -7,15 +7,19 @@ import java.net.URI;
 
 import at.yedel.antimations.config.AntimationsCommand;
 import at.yedel.antimations.config.AntimationsConfig;
+import at.yedel.antimations.utils.AntimationsPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.realms.RealmsSharedConstants;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 
 
 
@@ -58,10 +62,16 @@ public class Antimations {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new AntimationsCommand());
+        MinecraftForge.EVENT_BUS.register(this);
         boolean isOverflowAnimationsLoaded = Loader.isModLoaded("overflowanimations");
         boolean isSk1erAnimationsLoaded = Loader.isModLoaded("sk1er_old_animations");
         boolean isOrangeAnimationsLoaded = Loader.isModLoaded("animations");
         boolean isSpiderfrogAnimationsLoaded = doesClassExist("com.spiderfrog.oldanimations.OldAnimationsMod");
+    }
+
+    @SubscribeEvent
+    public void onServerConnect(ClientConnectedToServerEvent event) {
+        event.manager.channel().pipeline().addBefore("packet_handler", "antimations_packet_handler", new AntimationsPacketHandler());
     }
 
     private boolean doesClassExist(String className) {

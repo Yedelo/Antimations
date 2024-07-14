@@ -244,25 +244,14 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				225,
 				AntimationsConfig.getInstance().cancelItemUseHandResets,
 				"Cancel Item Use Hand Resets",
-				"Cancel your hand doing the re-equip animation when using an item (without it being consumed)."
-			)
-		);
-		itemResetAspects.add(
-			new ToggleAspect(
-				buttonId ++,
-				midpoint - 125,
-				90,
-				250,
-				AntimationsConfig.getInstance().cancelItemConsumptionHandResets,
-				"Cancel Item Consumption Hand Resets",
-				"Cancel your hand doing the re-equip animation when using an item (being consumed)."
+				"Cancel your hand doing the re-equip animation when using an item."
 			)
 		);
 		itemResetAspects.add(
 			new ToggleAspect(
 				buttonId ++,
 				midpoint - 112,
-				115,
+				90,
 				225,
 				AntimationsConfig.getInstance().cancelItemUpdateHandResets,
 				"Cancel Item Update Hand Resets",
@@ -273,11 +262,11 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 			new ToggleAspect(
 				buttonId ++,
 				midpoint - 112,
-				140,
+				115,
 				225,
 				AntimationsConfig.getInstance().cancelAllHandResets,
 				"Cancel All Hand Resets",
-				"Always cancel your hand doing the re-equip animation."
+				"Always cancel your hand doing the re-equip animation. Not recommended because switching between different items doesn't look smooth."
 			)
 		);
 	}

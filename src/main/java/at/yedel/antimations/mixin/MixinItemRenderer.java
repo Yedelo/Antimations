@@ -3,6 +3,7 @@ package at.yedel.antimations.mixin;
 
 
 import at.yedel.antimations.config.AntimationsConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -23,17 +24,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinItemRenderer {
 	@Shadow private ItemStack itemToRender;
 	@Shadow @Final private RenderItem itemRenderer;
+	@Shadow private int equippedItemSlot;
+	@Shadow @Final private Minecraft mc;
+
+	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getIsItemStackEqual(Lnet/minecraft/item/ItemStack;)Z"))
+	public boolean antimations$simplifyEqual(ItemStack instance, ItemStack p_179549_1_) {
+		if (AntimationsConfig.getInstance().cancelItemUpdateHandResets.get()) {
+			if (equippedItemSlot != mc.thePlayer.inventory.currentItem) return false;
+			return itemRenderer.getItemModelMesher().getItemModel(instance) == itemRenderer.getItemModelMesher().getItemModel(p_179549_1_);
+		}
+		return instance.getIsItemStackEqual(p_179549_1_);
+	}
 
 	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;shouldCauseReequipAnimation(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Z)Z"))
-	public boolean antimations$simplifyEqual(Item instance, ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+	public boolean antimations$cancelAllHandResets(Item instance, ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 		if (AntimationsConfig.getInstance().cancelAllHandResets.get()) return false;
-		else if (AntimationsConfig.getInstance().cancelItemUpdateHandResets.get()) {
-			if (slotChanged) return true;
-			return itemRenderer.getItemModelMesher().getItemModel(oldStack) == itemRenderer.getItemModelMesher().getItemModel(newStack);
-		}
-		else {
-			return instance.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
-		}
+		return instance.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
 	}
 
 	@Redirect(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;getItemInUseCount()I"))
@@ -52,15 +58,15 @@ public abstract class MixinItemRenderer {
 	}
 
 	@Inject(method = "resetEquippedProgress", at = @At("HEAD"), cancellable = true)
-	public void antimations$onUseItemAndItDoesntGoAway(CallbackInfo ci) {
+	public void antimations$onUseItem(CallbackInfo ci) {
 		if (AntimationsConfig.getInstance().cancelItemUseHandResets.get()) {
 			ci.cancel();
 		}
 	}
 
 	@Inject(method = "resetEquippedProgress2", at = @At("HEAD"), cancellable = true)
-	public void antimations$onUseItemAndItDoesGoAway(CallbackInfo ci) {
-		if (AntimationsConfig.getInstance().cancelItemConsumptionHandResets.get()) {
+	public void antimations$onConsumeItem(CallbackInfo ci) {
+		if (AntimationsConfig.getInstance().cancelItemUseHandResets.get()) {
 			ci.cancel();
 		}
 	}

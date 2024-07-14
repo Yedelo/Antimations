@@ -25,7 +25,6 @@ public class AntimationsConfig {
     public ToggleObject cancelOtherPlayerSwings;
 
     public ToggleObject cancelItemUseHandResets;
-    public ToggleObject cancelItemConsumptionHandResets;
     public ToggleObject cancelItemUpdateHandResets;
     public ToggleObject cancelAllHandResets;
 
@@ -46,7 +45,6 @@ public class AntimationsConfig {
         cancelOtherPlayerSwings = new ToggleObject(config, getValue("cancelOtherPlayerSwings", false), "cancelOtherPlayerSwings", false);
 
         cancelItemUseHandResets = new ToggleObject(config, getValue("cancelItemUseHandResets", true), "cancelItemUseHandResets", true);
-        cancelItemConsumptionHandResets = new ToggleObject(config, getValue("cancelItemConsumptionHandResets", true), "cancelItemConsumptionHandResets", true);
         cancelItemUpdateHandResets = new ToggleObject(config, getValue("cancelItemUpdateHandResets", true), "cancelItemUpdateHandResets", true);
         cancelAllHandResets = new ToggleObject(config, getValue("cancelAllHandResets", false), "cancelAllHandResets", false);
 

@@ -32,7 +32,7 @@ public class MixinMinecraft {
     }
 
     @Redirect(method = "rightClickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
-    public void antimations$onPlaceBlockOrInteractWithOne(EntityPlayerSP instance) {
+    public void antimations$onInteractWithBlock(EntityPlayerSP instance) {
         if (AntimationsConfig.getInstance().cancelBlockInteractSwings.get()) {
             AnimationCanceller.sendAnimationPacket();
         }

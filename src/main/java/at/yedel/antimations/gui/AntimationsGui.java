@@ -306,6 +306,28 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				"Cancel third person blocking animations from you and other players"
 			)
 		);
+		otherAspects.add(
+			new ToggleAspect(
+				buttonId ++,
+				midpoint - 112,
+				115,
+				225,
+				AntimationsConfig.getInstance().cancelEatingAnimations,
+				"Cancel Eating Animations",
+				"Cancel first person eating animations."
+			)
+		);
+		otherAspects.add(
+			new ToggleAspect(
+				buttonId ++,
+				midpoint - 112,
+				140,
+				225,
+				AntimationsConfig.getInstance().cancelDrinkingAnimations,
+				"Cancel Drinking Animations",
+				"Cancel first person drinking animations."
+			)
+		);
 	}
 
 	private void addConfigAspects() {

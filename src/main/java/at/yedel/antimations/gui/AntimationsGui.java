@@ -60,11 +60,11 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		midpoint = width / 2;
 		IconAspect discordButton;
 
-		buttonList.add(modrinthButton = new IconAspect(buttonId ++, midpoint - 12 - 30, 15, 25, 25, new ResourceLocation("antimations", "modrinth.png"), "Click to open the Modrinth page for this mod."));
-		buttonList.add(githubButton = new IconAspect(buttonId ++, midpoint - 12, 15, 25, 25, new ResourceLocation("antimations", "github.png"), "Click to open the GitHub repository for this mod."));
-		buttonList.add(discordButton = new IconAspect(buttonId ++, midpoint - 12 + 30, 15, 25, 25, new ResourceLocation("antimations", "discord.png"), "Discord: yedel"));
-		buttonList.add(previousPageButton = new PreviousPageButton(buttonId ++, midpoint - 100, height - 39));
-		buttonList.add(nextPageButton = new NextPageButton(buttonId ++, midpoint + 85, height - 39));
+		buttonList.add(modrinthButton = new IconAspect(buttonId++, midpoint - 12 - 30, 15, 25, 25, new ResourceLocation("antimations", "modrinth.png"), "Click to open the Modrinth page for this mod."));
+		buttonList.add(githubButton = new IconAspect(buttonId++, midpoint - 12, 15, 25, 25, new ResourceLocation("antimations", "github.png"), "Click to open the GitHub repository for this mod."));
+		buttonList.add(discordButton = new IconAspect(buttonId++, midpoint - 12 + 30, 15, 25, 25, new ResourceLocation("antimations", "discord.png"), "Discord: yedel"));
+		buttonList.add(previousPageButton = new PreviousPageButton(buttonId++, midpoint - 100, height - 39));
+		buttonList.add(nextPageButton = new NextPageButton(buttonId++, midpoint + 85, height - 39));
 
 		setupConfigAspects();
 		setupConfigPages();
@@ -80,9 +80,9 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 			}
 		}
 
-		buttonList.add(resetButton = new GuiButton(buttonId ++, midpoint - 42, height - 50, 85, 20, "Reset"));
-		buttonList.add(doneButton = new GuiButton(buttonId ++, midpoint - 75, height - 25, 150, 20, "Done"));
-		buttonList.add(openConfigFileButton = new GuiButton(buttonId ++, width - 105, height - 25, 100, 20, "Open Config File"));
+		buttonList.add(resetButton = new GuiButton(buttonId++, midpoint - 42, height - 50, 85, 20, "Reset"));
+		buttonList.add(doneButton = new GuiButton(buttonId++, midpoint - 75, height - 25, 150, 20, "Done"));
+		buttonList.add(openConfigFileButton = new GuiButton(buttonId++, width - 105, height - 25, 100, 20, "Open Config File"));
 
 		currentConfigPage = configPages.get(0);
 	}
@@ -168,7 +168,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		swingCustomizationAspects.clear();
 		swingCustomizationAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				65,
 				225,
@@ -179,7 +179,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		swingCustomizationAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				90,
 				225,
@@ -190,7 +190,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		swingCustomizationAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				115,
 				225,
@@ -201,7 +201,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		swingCustomizationAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				140,
 				225,
@@ -212,7 +212,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		swingCustomizationAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				165,
 				225,
@@ -223,7 +223,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		swingCustomizationAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				190,
 				225,
@@ -238,7 +238,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		itemResetAspects.clear();
 		itemResetAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				65,
 				225,
@@ -249,7 +249,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		itemResetAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				90,
 				225,
@@ -260,7 +260,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		itemResetAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				115,
 				225,
@@ -275,7 +275,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		otherAspects.clear();
 		otherAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				65,
 				225,
@@ -286,7 +286,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		otherAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 125,
 				90,
 				250,
@@ -297,7 +297,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		otherAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				115,
 				225,
@@ -308,7 +308,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		otherAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 125,
 				140,
 				250,
@@ -319,7 +319,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		otherAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				165,
 				225,
@@ -330,7 +330,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		);
 		otherAspects.add(
 			new ToggleAspect(
-				buttonId ++,
+				buttonId++,
 				midpoint - 112,
 				190,
 				225,

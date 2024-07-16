@@ -10,5 +10,6 @@
     "MixinItemRenderer",
     "MixinMinecraft",
     "MixinRenderPlayer"
-  ]
+  ],
+  "verbose": true
 }

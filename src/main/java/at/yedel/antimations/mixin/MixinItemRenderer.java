@@ -43,10 +43,12 @@ public abstract class MixinItemRenderer {
 	}
 
 	@Redirect(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;getItemInUseCount()I"))
-	public int antimations$cancelCertainAnimations(AbstractClientPlayer instance) {
+	public int antimations$cancelFirstPersonAnimations(AbstractClientPlayer instance) {
 		EnumAction itemUseAction = itemToRender.getItemUseAction();
 		if (
 			(AntimationsConfig.getInstance().cancelOwnBlockAnimations.get() && itemUseAction == EnumAction.BLOCK)
+			||
+			(AntimationsConfig.getInstance().cancelOwnBowAnimations.get() && itemUseAction == EnumAction.BOW)
 			||
 			(AntimationsConfig.getInstance().cancelEatingAnimations.get() && itemUseAction == EnumAction.EAT)
 			||

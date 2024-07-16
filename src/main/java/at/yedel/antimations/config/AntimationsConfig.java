@@ -30,6 +30,8 @@ public class AntimationsConfig {
 
     public ToggleObject cancelOwnBlockAnimations;
     public ToggleObject cancelThirdPersonBlockAnimations;
+    public ToggleObject cancelOwnBowAnimations;
+    public ToggleObject cancelThirdPersonBowAnimations;
     public ToggleObject cancelEatingAnimations;
     public ToggleObject cancelDrinkingAnimations;
 
@@ -50,6 +52,8 @@ public class AntimationsConfig {
 
         cancelOwnBlockAnimations = new ToggleObject(config, getValue("cancelOwnBlockAnimations", false), "cancelOwnBlockAnimations", false);
         cancelThirdPersonBlockAnimations = new ToggleObject(config, getValue("cancelThirdPersonBlockAnimations", false), "cancelThirdPersonBlockAnimations", false);
+        cancelOwnBowAnimations = new ToggleObject(config, getValue("cancelOwnBowAnimations", false), "cancelOwnBowAnimations", false);
+        cancelThirdPersonBowAnimations = new ToggleObject(config, getValue("cancelThirdPersonBowAnimations", false), "cancelThirdPersonBowAnimations", false);
         cancelEatingAnimations = new ToggleObject(config, getValue("cancelEatingAnimations", false), "cancelEatingAnimations", false);
         cancelDrinkingAnimations = new ToggleObject(config, getValue("cancelDrinkingAnimations", false), "cancelDrinkingAnimations", false);
 

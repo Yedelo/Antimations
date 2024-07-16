@@ -292,7 +292,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				250,
 				AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations,
 				"Cancel Third Person Block Animations",
-				"Cancel third person blocking animations from you and other players"
+				"Cancel third person blocking animations from you and other players."
 			)
 		);
 		otherAspects.add(
@@ -300,6 +300,28 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				buttonId ++,
 				midpoint - 112,
 				115,
+				225,
+				AntimationsConfig.getInstance().cancelOwnBowAnimations,
+				"Cancel Own Bow Animations",
+				"Cancel your own bow animations in first person. §eArrow models will still be drawn."
+			)
+		);
+		otherAspects.add(
+			new ToggleAspect(
+				buttonId ++,
+				midpoint - 125,
+				140,
+				250,
+				AntimationsConfig.getInstance().cancelThirdPersonBowAnimations,
+				"Cancel Third Person Bow Animations",
+				"Cancel third person bow animations from you and other players. §eArrow models will still be drawn."
+			)
+		);
+		otherAspects.add(
+			new ToggleAspect(
+				buttonId ++,
+				midpoint - 112,
+				165,
 				225,
 				AntimationsConfig.getInstance().cancelEatingAnimations,
 				"Cancel Eating Animations",
@@ -310,7 +332,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 			new ToggleAspect(
 				buttonId ++,
 				midpoint - 112,
-				140,
+				190,
 				225,
 				AntimationsConfig.getInstance().cancelDrinkingAnimations,
 				"Cancel Drinking Animations",

@@ -8,7 +8,6 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,12 +33,6 @@ public abstract class MixinItemRenderer {
 			return itemRenderer.getItemModelMesher().getItemModel(instance) == itemRenderer.getItemModelMesher().getItemModel(p_179549_1_);
 		}
 		return instance.getIsItemStackEqual(p_179549_1_);
-	}
-
-	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;shouldCauseReequipAnimation(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Z)Z"))
-	private boolean antimations$cancelAllHandResets(Item instance, ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		if (AntimationsConfig.getInstance().cancelAllHandResets.get()) return false;
-		return instance.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
 	}
 
 	@Redirect(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;getItemInUseCount()I"))

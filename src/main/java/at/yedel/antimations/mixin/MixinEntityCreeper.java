@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(EntityCreeper.class)
 public abstract class MixinEntityCreeper {
     @Redirect(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
-    public void antimations$onIgniteCreeper(EntityPlayer instance) {
+    private void antimations$onIgniteCreeper(EntityPlayer instance) {
         if (AntimationsConfig.getInstance().cancelCreeperIgnitionSwings.get()) {
             AnimationCanceller.sendAnimationPacket();
         }

@@ -28,7 +28,7 @@ public abstract class MixinItemRenderer {
 	@Shadow @Final private Minecraft mc;
 
 	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getIsItemStackEqual(Lnet/minecraft/item/ItemStack;)Z"))
-	public boolean antimations$simplifyEqual(ItemStack instance, ItemStack p_179549_1_) {
+	private boolean antimations$simplifyEqual(ItemStack instance, ItemStack p_179549_1_) {
 		if (AntimationsConfig.getInstance().cancelItemUpdateHandResets.get()) {
 			if (equippedItemSlot != mc.thePlayer.inventory.currentItem) return false;
 			return itemRenderer.getItemModelMesher().getItemModel(instance) == itemRenderer.getItemModelMesher().getItemModel(p_179549_1_);
@@ -37,13 +37,13 @@ public abstract class MixinItemRenderer {
 	}
 
 	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;shouldCauseReequipAnimation(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Z)Z"))
-	public boolean antimations$cancelAllHandResets(Item instance, ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+	private boolean antimations$cancelAllHandResets(Item instance, ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 		if (AntimationsConfig.getInstance().cancelAllHandResets.get()) return false;
 		return instance.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
 	}
 
 	@Redirect(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;getItemInUseCount()I"))
-	public int antimations$cancelFirstPersonAnimations(AbstractClientPlayer instance) {
+	private int antimations$cancelFirstPersonAnimations(AbstractClientPlayer instance) {
 		EnumAction itemUseAction = itemToRender.getItemUseAction();
 		if (
 			(AntimationsConfig.getInstance().cancelOwnBlockAnimations.get() && itemUseAction == EnumAction.BLOCK)
@@ -60,14 +60,14 @@ public abstract class MixinItemRenderer {
 	}
 
 	@Inject(method = "resetEquippedProgress", at = @At("HEAD"), cancellable = true)
-	public void antimations$onUseItem(CallbackInfo ci) {
+	private void antimations$onUseItem(CallbackInfo ci) {
 		if (AntimationsConfig.getInstance().cancelItemUseHandResets.get()) {
 			ci.cancel();
 		}
 	}
 
 	@Inject(method = "resetEquippedProgress2", at = @At("HEAD"), cancellable = true)
-	public void antimations$onConsumeItem(CallbackInfo ci) {
+	private void antimations$onConsumeItem(CallbackInfo ci) {
 		if (AntimationsConfig.getInstance().cancelItemUseHandResets.get()) {
 			ci.cancel();
 		}

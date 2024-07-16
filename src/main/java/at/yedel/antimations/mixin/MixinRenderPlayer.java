@@ -19,7 +19,7 @@ public abstract class MixinRenderPlayer {
     @Shadow public abstract ModelPlayer getMainModel();
 
     @Inject(method = "setModelVisibilities", at = @At("TAIL"))
-    public void antimations$removeStatuses(AbstractClientPlayer clientPlayer, CallbackInfo ci) {
+    private void antimations$removeStatuses(AbstractClientPlayer clientPlayer, CallbackInfo ci) {
         ModelPlayer modelPlayer = getMainModel();
         if (AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations.get() && modelPlayer.heldItemRight == 3) {
             modelPlayer.heldItemRight = 1;

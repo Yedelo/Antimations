@@ -4,6 +4,7 @@ package at.yedel.antimations;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Map;
 import java.util.Objects;
 
 import at.yedel.antimations.config.AntimationsCommand;
@@ -26,6 +27,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
+import net.minecraftforge.fml.common.network.NetworkCheckHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 
 
@@ -76,6 +79,14 @@ public class Antimations {
         boolean isOrangeAnimationsLoaded = Loader.isModLoaded("animations");
         boolean isSpiderfrogAnimationsLoaded = doesClassExist("com.spiderfrog.oldanimations.OldAnimationsMod");
         itemModelMesher = minecraft.getRenderItem().getItemModelMesher();
+    }
+
+    // For some reason, Forge rejects clients trying to connect to servers with this mod, even though it is client side only.
+    // This overrides the check and tells Forge that any player can connect.
+
+    @NetworkCheckHandler
+    public boolean permitPlayers(Map<String, String> modMap, Side side) {
+        return true;
     }
 
     @SubscribeEvent

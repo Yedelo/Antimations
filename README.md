@@ -1,6 +1,6 @@
 # Antimations (1.8.9)
 
-![version 2.1.0](https://img.shields.io/badge/version-v2.1.0-lightblue)
+![version 2.2.0](https://img.shields.io/badge/version-v2.2.0-lightblue)
 
 Cancels swing and other animations on players. Packets will still be sent so the mod is safe to use for anticheats.
 

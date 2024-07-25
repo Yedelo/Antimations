@@ -43,7 +43,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class Antimations {
     public static final String modid = "antimations";
     public static final String name = "Antimations";
-    public static final String version = "2.1.0";
+    public static final String version = "2.2.0";
     public static final String totalVersionString = "v" + version + "-" + RealmsSharedConstants.VERSION_STRING;
 
     public static final Minecraft minecraft = Minecraft.getMinecraft();

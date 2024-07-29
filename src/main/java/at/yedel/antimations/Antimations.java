@@ -19,7 +19,6 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -74,10 +73,6 @@ public class Antimations {
     public void init(FMLInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new AntimationsCommand());
         MinecraftForge.EVENT_BUS.register(this);
-        boolean isOverflowAnimationsLoaded = Loader.isModLoaded("overflowanimations");
-        boolean isSk1erAnimationsLoaded = Loader.isModLoaded("sk1er_old_animations");
-        boolean isOrangeAnimationsLoaded = Loader.isModLoaded("animations");
-        boolean isSpiderfrogAnimationsLoaded = doesClassExist("com.spiderfrog.oldanimations.OldAnimationsMod");
         itemModelMesher = minecraft.getRenderItem().getItemModelMesher();
     }
 
@@ -105,16 +100,6 @@ public class Antimations {
     public void onClickAntimationsButton(ActionPerformedEvent event) {
         if (Objects.equals(event.button.displayString, "Open Antimations Settings")) {
             minecraft.displayGuiScreen(new AntimationsGui(event.gui));
-        }
-    }
-
-    private boolean doesClassExist(String className) {
-        try {
-            Class.forName(className);
-            return true;
-        }
-        catch (ClassNotFoundException e) {
-            return false;
         }
     }
 }

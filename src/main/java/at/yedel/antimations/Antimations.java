@@ -32,12 +32,12 @@ import net.minecraftforge.fml.relauncher.Side;
 
 
 @Mod(
-        acceptedMinecraftVersions = "1.8.9",
-        clientSideOnly = true,
-        modid = Antimations.modid,
-        name = Antimations.name,
-        version = Antimations.version,
-        guiFactory = "at.yedel.antimations.utils.AntimationsGuiFactory"
+    acceptedMinecraftVersions = "1.8.9",
+    clientSideOnly = true,
+    modid = Antimations.modid,
+    name = Antimations.name,
+    version = Antimations.version,
+    guiFactory = "at.yedel.antimations.utils.AntimationsGuiFactory"
 )
 public class Antimations {
     public static final String modid = "antimations";

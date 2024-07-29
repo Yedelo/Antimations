@@ -46,6 +46,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 	private ConfigPage otherPage = new ConfigPage("Other", otherAspects);
 	private FlowArrayList<ConfigPage> configPages = new FlowArrayList<>();
 	private ConfigPage currentConfigPage;
+	private int currentPageNumber;
 	private GuiButton resetButton;
 	private GuiButton doneButton;
 	private GuiButton openConfigFileButton;
@@ -85,6 +86,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		buttonList.add(openConfigFileButton = new GuiButton(buttonId++, width - 105, height - 25, 100, 20, "Open Config File"));
 
 		currentConfigPage = configPages.get(0);
+		currentPageNumber = 1;
 	}
 
 	@Override
@@ -92,7 +94,8 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj, "Antimations " + Antimations.version + " by Yedel", midpoint, 5, WHITE);
 		drawHorizontalLine(175, width - 175, 45, GRAY);
-		drawCenteredString(fontRendererObj, currentConfigPage.getTitle(), midpoint, 50, WHITE);
+		String pageInfoString = currentConfigPage.getTitle() + " (Page " + currentPageNumber + "/3)";
+		drawCenteredString(fontRendererObj, pageInfoString, midpoint, 50, WHITE);
 		drawString(fontRendererObj, Antimations.totalVersionString, 5, height - fontRendererObj.FONT_HEIGHT - 5, GRAY);
 		for (GuiButton button: buttonList) {
 			button.drawButton(mc, mouseX, mouseY);
@@ -115,9 +118,11 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		}
 		else if (button == previousPageButton) {
 			currentConfigPage = configPages.getPreviousElement(currentConfigPage);
+			currentPageNumber = configPages.indexOf(currentConfigPage) + 1;
 		}
 		else if (button == nextPageButton) {
 			currentConfigPage = configPages.getNextElement(currentConfigPage);
+			currentPageNumber = configPages.indexOf(currentConfigPage) + 1;
 		}
 		else if (button == resetButton) {
 			if (Objects.equals(button.displayString, "Reset")) {

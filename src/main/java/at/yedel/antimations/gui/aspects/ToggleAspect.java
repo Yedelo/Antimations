@@ -12,9 +12,9 @@ import static at.yedel.antimations.Antimations.minecraft;
 
 
 public class ToggleAspect extends GuiButton implements ConfigAspect, HoverableAspect {
-    private ToggleObject toggleObject;
-    private String settingName;
-    private String hoverText;
+    private final ToggleObject toggleObject;
+    private final String settingName;
+    private final String hoverText;
 
     public ToggleAspect(int buttonId, int x, int y, int width, ToggleObject toggleObject) {
         this(buttonId, x, y, width, 20, toggleObject);

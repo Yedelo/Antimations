@@ -27,9 +27,9 @@ import org.lwjgl.input.Keyboard;
 
 
 public class AntimationsGui extends GuiScreen implements Colorful {
-	private GuiScreen parentScreen;
-	private URI modrinthUri = URI.create("https://modrinth.com/project/antimations");
-	private URI githubUri = URI.create("https://github.com/Yedelo/Antimations");
+	private final GuiScreen parentScreen;
+	private final URI modrinthUri = URI.create("https://modrinth.com/project/antimations");
+	private final URI githubUri = URI.create("https://github.com/Yedelo/Antimations");
 	private int midpoint;
 	private int currentButtonId;
 	private ArrayList<HoverableAspect> hoverableAspects;
@@ -37,14 +37,14 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 	private IconAspect githubButton;
 	private PreviousPageButton previousPageButton;
 	private NextPageButton nextPageButton;
-	private List<ConfigAspect> swingCustomizationAspects = new ArrayList<>();
-	private List<ConfigAspect> itemResetAspects = new ArrayList<>();
-	private List<ConfigAspect> otherAspects = new ArrayList<>();
-	private List<ConfigAspect> configAspects = new ArrayList<>();
-	private ConfigPage swingCustomizationPage = new ConfigPage("Swing Customization", swingCustomizationAspects);
-	private ConfigPage itemResetPage = new ConfigPage("Item Reset Customizaion", itemResetAspects);
-	private ConfigPage otherPage = new ConfigPage("Other", otherAspects);
-	private FlowArrayList<ConfigPage> configPages = new FlowArrayList<>();
+	private final List<ConfigAspect> swingCustomizationAspects = new ArrayList<>();
+	private final List<ConfigAspect> itemResetAspects = new ArrayList<>();
+	private final List<ConfigAspect> otherAspects = new ArrayList<>();
+	private final List<ConfigAspect> configAspects = new ArrayList<>();
+	private final ConfigPage swingCustomizationPage = new ConfigPage("Swing Customization", swingCustomizationAspects);
+	private final ConfigPage itemResetPage = new ConfigPage("Item Reset Customizaion", itemResetAspects);
+	private final ConfigPage otherPage = new ConfigPage("Other", otherAspects);
+	private final FlowArrayList<ConfigPage> configPages = new FlowArrayList<>();
 	private ConfigPage currentConfigPage;
 	private int currentPageNumber;
 	private GuiButton resetButton;

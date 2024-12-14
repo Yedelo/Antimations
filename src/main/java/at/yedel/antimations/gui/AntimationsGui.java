@@ -177,9 +177,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				65,
 				225,
-				AntimationsConfig.getInstance().cancelCreeperIgnitionSwings,
-				"Cancel Creeper Ignition Swings",
-				"Cancel swinging your hand when igniting a creeper."
+				AntimationsConfig.getInstance().cancelCreeperIgnitionSwings
 			)
 		);
 		swingCustomizationAspects.add(
@@ -188,9 +186,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				90,
 				225,
-				AntimationsConfig.getInstance().cancelFishingRodSwings,
-				"Cancel Fishing Rod Swings",
-				"Cancel swinging your hand when using a fishing rod."
+				AntimationsConfig.getInstance().cancelFishingRodSwings
 			)
 		);
 		swingCustomizationAspects.add(
@@ -199,9 +195,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				115,
 				225,
-				AntimationsConfig.getInstance().cancelBlockHitSwings,
-				"Cancel Block Hit Swings",
-				"Cancel swinging your hand when hitting a block."
+				AntimationsConfig.getInstance().cancelBlockHitSwings
 			)
 		);
 		swingCustomizationAspects.add(
@@ -210,9 +204,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				140,
 				225,
-				AntimationsConfig.getInstance().cancelAirOrEntitySwings,
-				"Cancel Air or Entity Swings",
-				"Cancel swinging your hand when swinging at the air or at an entity."
+				AntimationsConfig.getInstance().cancelAirOrEntitySwings
 			)
 		);
 		swingCustomizationAspects.add(
@@ -221,9 +213,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				165,
 				225,
-				AntimationsConfig.getInstance().cancelBlockInteractSwings,
-				"Cancel Block Interact Swings",
-				"Cancel swinging your hand when interacting with blocks."
+				AntimationsConfig.getInstance().cancelBlockInteractSwings
 			)
 		);
 		swingCustomizationAspects.add(
@@ -232,9 +222,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				190,
 				225,
-				AntimationsConfig.getInstance().cancelOtherPlayerSwings,
-				"Cancel Other Player Swings",
-				"Cancel swing animations from other players."
+				AntimationsConfig.getInstance().cancelOtherPlayerSwings
 			)
 		);
 	}
@@ -247,9 +235,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				65,
 				225,
-				AntimationsConfig.getInstance().cancelItemUseHandResets,
-				"Cancel Item Use Hand Resets",
-				"Cancel your hand doing the re-equip animation when using an item."
+				AntimationsConfig.getInstance().cancelItemUseHandResets
 			)
 		);
 		itemResetAspects.add(
@@ -258,9 +244,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				90,
 				225,
-				AntimationsConfig.getInstance().cancelItemUpdateHandResets,
-				"Cancel Item Update Hand Resets",
-				"Cancel your hand doing the re-equip animation when your item updates (durability, lore...)."
+				AntimationsConfig.getInstance().cancelItemUpdateHandResets
 			)
 		);
 		itemResetAspects.add(
@@ -269,9 +253,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				115,
 				225,
-				AntimationsConfig.getInstance().cancelAllHandResets,
-				"Cancel All Hand Resets",
-				"Always cancel your hand doing the re-equip animation. Not recommended because switching between different items doesn't look smooth."
+				AntimationsConfig.getInstance().cancelAllHandResets
 			)
 		);
 	}
@@ -284,9 +266,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				65,
 				225,
-				AntimationsConfig.getInstance().cancelOwnBlockAnimations,
-				"Cancel Own Block Animations",
-				"Cancel your own blocking animations in first person."
+				AntimationsConfig.getInstance().cancelOwnBlockAnimations
 			)
 		);
 		otherAspects.add(
@@ -295,9 +275,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 125,
 				90,
 				250,
-				AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations,
-				"Cancel Third Person Block Animations",
-				"Cancel third person blocking animations from you and other players."
+				AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations
 			)
 		);
 		otherAspects.add(
@@ -306,9 +284,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				115,
 				225,
-				AntimationsConfig.getInstance().cancelOwnBowAnimations,
-				"Cancel Own Bow Animations",
-				"Cancel your own bow animations in first person. §eArrow models will still be drawn."
+				AntimationsConfig.getInstance().cancelOwnBowAnimations
 			)
 		);
 		otherAspects.add(
@@ -317,9 +293,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 125,
 				140,
 				250,
-				AntimationsConfig.getInstance().cancelThirdPersonBowAnimations,
-				"Cancel Third Person Bow Animations",
-				"Cancel third person bow animations from you and other players. §eArrow models will still be drawn."
+				AntimationsConfig.getInstance().cancelThirdPersonBowAnimations
 			)
 		);
 		otherAspects.add(
@@ -328,9 +302,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				165,
 				225,
-				AntimationsConfig.getInstance().cancelEatingAnimations,
-				"Cancel Eating Animations",
-				"Cancel first person eating animations."
+				AntimationsConfig.getInstance().cancelEatingAnimations
 			)
 		);
 		otherAspects.add(
@@ -339,9 +311,7 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 				midpoint - 112,
 				190,
 				225,
-				AntimationsConfig.getInstance().cancelDrinkingAnimations,
-				"Cancel Drinking Animations",
-				"Cancel first person drinking animations."
+				AntimationsConfig.getInstance().cancelDrinkingAnimations
 			)
 		);
 	}

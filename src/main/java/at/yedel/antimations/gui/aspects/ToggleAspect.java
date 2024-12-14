@@ -13,18 +13,18 @@ import static at.yedel.antimations.Antimations.minecraft;
 
 public class ToggleAspect extends GuiButton implements ConfigAspect, HoverableAspect {
     private ToggleObject toggleObject;
-    private String settingDescription;
+    private String settingName;
     private String hoverText;
 
-    public ToggleAspect(int buttonId, int x, int y, int width, ToggleObject toggleObject, String settingDescription, String hoverText) {
-        this(buttonId, x, y, width, 20, toggleObject, settingDescription, hoverText);
+    public ToggleAspect(int buttonId, int x, int y, int width, ToggleObject toggleObject) {
+        this(buttonId, x, y, width, 20, toggleObject);
     }
 
-    public ToggleAspect(int buttonId, int x, int y, int width, int height, ToggleObject toggleObject, String settingDescription, String hoverText) {
-        super(buttonId, x, y, width, height, settingDescription + toggleObject.getToggleText());
+    public ToggleAspect(int buttonId, int x, int y, int width, int height, ToggleObject toggleObject) {
+        super(buttonId, x, y, width, height, toggleObject.getName() + toggleObject.getToggleText());
         this.toggleObject = toggleObject;
-        this.settingDescription = settingDescription;
-        this.hoverText = hoverText;
+        this.settingName = toggleObject.getName();
+        this.hoverText = toggleObject.getDescription();
     }
 
     public void render(int mouseX, int mouseY) {
@@ -46,7 +46,7 @@ public class ToggleAspect extends GuiButton implements ConfigAspect, HoverableAs
     }
 
     private String getNewDisplayString() {
-        return settingDescription + toggleObject.getToggleText();
+        return settingName + toggleObject.getToggleText();
     }
 
     @Override

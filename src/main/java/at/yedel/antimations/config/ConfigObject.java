@@ -3,10 +3,14 @@ package at.yedel.antimations.config;
 
 
 public abstract class ConfigObject<T> {
+    private final String name;
+    private final String description;
     private T variable;
-    protected String variableName;
-    protected T defaultValue;
-    public ConfigObject(T variable, String variableName, T defaultValue) {
+    protected final String variableName;
+    protected final T defaultValue;
+    public ConfigObject(String name, String description, T variable, String variableName, T defaultValue) {
+        this.name = name;
+        this.description = description;
         this.variable = variable;
         this.variableName = variableName;
         this.defaultValue = defaultValue;
@@ -19,6 +23,14 @@ public abstract class ConfigObject<T> {
     public void set(T newValue) {
         variable = newValue;
         save(newValue);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     abstract void save(T newValue);

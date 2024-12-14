@@ -7,8 +7,8 @@ import net.minecraftforge.common.config.Configuration;
 
 
 public class ToggleObject extends ConfigObject<Boolean> {
-    public ToggleObject(String name, String description, String variableName, Boolean defaultValue) {
-        super(name, description, getValue(variableName, defaultValue), variableName, defaultValue);
+    public ToggleObject(String name, String description, ConfigCategory configCategory, String variableName, Boolean defaultValue) {
+        super(name, description, getValue(variableName, defaultValue), configCategory, variableName, defaultValue);
     }
 
     public void toggle() {

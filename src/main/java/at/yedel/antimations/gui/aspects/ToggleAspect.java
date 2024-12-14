@@ -16,12 +16,8 @@ public class ToggleAspect extends GuiButton implements ConfigAspect, HoverableAs
     private final String settingName;
     private final String hoverText;
 
-    public ToggleAspect(int buttonId, int x, int y, int width, ToggleObject toggleObject) {
-        this(buttonId, x, y, width, 20, toggleObject);
-    }
-
-    public ToggleAspect(int buttonId, int x, int y, int width, int height, ToggleObject toggleObject) {
-        super(buttonId, x, y, width, height, toggleObject.getName() + toggleObject.getToggleText());
+    public ToggleAspect(ToggleObject toggleObject, int buttonId, int x, int y, int width) {
+        super(buttonId, x, y, width, 20, toggleObject.getName() + toggleObject.getToggleText());
         this.toggleObject = toggleObject;
         this.settingName = toggleObject.getName();
         this.hoverText = toggleObject.getDescription();

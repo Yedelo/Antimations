@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import at.yedel.antimations.Antimations;
 import at.yedel.antimations.config.AntimationsConfig;
+import at.yedel.antimations.config.ToggleObject;
 import at.yedel.antimations.gui.aspects.ConfigAspect;
 import at.yedel.antimations.gui.aspects.HoverableAspect;
 import at.yedel.antimations.gui.aspects.IconAspect;
@@ -171,149 +172,29 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 
 	private void setupSwingCustomizationAspects() {
 		swingCustomizationAspects.clear();
-		swingCustomizationAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				65,
-				225,
-				AntimationsConfig.getInstance().cancelCreeperIgnitionSwings
-			)
-		);
-		swingCustomizationAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				90,
-				225,
-				AntimationsConfig.getInstance().cancelFishingRodSwings
-			)
-		);
-		swingCustomizationAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				115,
-				225,
-				AntimationsConfig.getInstance().cancelBlockHitSwings
-			)
-		);
-		swingCustomizationAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				140,
-				225,
-				AntimationsConfig.getInstance().cancelAirOrEntitySwings
-			)
-		);
-		swingCustomizationAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				165,
-				225,
-				AntimationsConfig.getInstance().cancelBlockInteractSwings
-			)
-		);
-		swingCustomizationAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				190,
-				225,
-				AntimationsConfig.getInstance().cancelOtherPlayerSwings
-			)
-		);
+		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelCreeperIgnitionSwings, midpoint - 112, 65, 225);
+		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelFishingRodSwings, midpoint - 112, 90, 225);
+		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelBlockHitSwings, midpoint - 112, 115, 225);
+		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelAirOrEntitySwings, midpoint - 112, 140, 225);
+		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelBlockInteractSwings, midpoint - 112, 165, 225);
+		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelOtherPlayerSwings, midpoint - 112, 190, 225);
 	}
 
 	private void setupItemResetAspects() {
 		itemResetAspects.clear();
-		itemResetAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				65,
-				225,
-				AntimationsConfig.getInstance().cancelItemUseHandResets
-			)
-		);
-		itemResetAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				90,
-				225,
-				AntimationsConfig.getInstance().cancelItemUpdateHandResets
-			)
-		);
-		itemResetAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				115,
-				225,
-				AntimationsConfig.getInstance().cancelAllHandResets
-			)
-		);
+		addToggleAspect(itemResetAspects, AntimationsConfig.getInstance().cancelItemUseHandResets, midpoint - 112, 65, 225);
+		addToggleAspect(itemResetAspects, AntimationsConfig.getInstance().cancelItemUpdateHandResets, midpoint - 112, 90, 225);
+		addToggleAspect(itemResetAspects, AntimationsConfig.getInstance().cancelAllHandResets, midpoint - 112, 115, 225);
 	}
 
 	private void setupOtherAspects() {
 		otherAspects.clear();
-		otherAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				65,
-				225,
-				AntimationsConfig.getInstance().cancelOwnBlockAnimations
-			)
-		);
-		otherAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 125,
-				90,
-				250,
-				AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations
-			)
-		);
-		otherAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				115,
-				225,
-				AntimationsConfig.getInstance().cancelOwnBowAnimations
-			)
-		);
-		otherAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 125,
-				140,
-				250,
-				AntimationsConfig.getInstance().cancelThirdPersonBowAnimations
-			)
-		);
-		otherAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				165,
-				225,
-				AntimationsConfig.getInstance().cancelEatingAnimations
-			)
-		);
-		otherAspects.add(
-			new ToggleAspect(
-				buttonId(),
-				midpoint - 112,
-				190,
-				225,
-				AntimationsConfig.getInstance().cancelDrinkingAnimations
-			)
-		);
+		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelOwnBlockAnimations, midpoint - 112, 65, 225);
+		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations, midpoint - 125, 90, 250);
+		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelOwnBowAnimations, midpoint - 112, 115, 225);
+		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelThirdPersonBowAnimations, midpoint - 125, 140, 250);
+		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelEatingAnimations, midpoint - 112, 165, 225);
+		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelDrinkingAnimations, midpoint - 112, 190, 225);
 	}
 
 	private void addConfigAspects() {
@@ -326,6 +207,10 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		configPages.add(swingCustomizationPage);
 		configPages.add(itemResetPage);
 		configPages.add(otherPage);
+	}
+
+	private void addToggleAspect(List<ConfigAspect> aspectList, ToggleObject toggleObject, int x, int y, int width) {
+		aspectList.add(new ToggleAspect(toggleObject, buttonId(), x, y, width));
 	}
 
 	private int buttonId() {

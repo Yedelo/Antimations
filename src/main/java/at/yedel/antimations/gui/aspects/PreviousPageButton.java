@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 
 public class PreviousPageButton extends GuiButton {
-	private ResourceLocation serverSelectionButtons = new ResourceLocation("textures/gui/server_selection.png");
+	private final ResourceLocation serverSelectionButtons = new ResourceLocation("textures/gui/server_selection.png");
 
 	public PreviousPageButton(int buttonId, int x, int y) {
 		super(buttonId, x, y, 15, 20,"");

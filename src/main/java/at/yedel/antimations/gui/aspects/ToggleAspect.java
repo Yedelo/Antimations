@@ -2,6 +2,7 @@ package at.yedel.antimations.gui.aspects;
 
 
 
+import at.yedel.antimations.config.ConfigCategory;
 import at.yedel.antimations.config.ToggleObject;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;
@@ -21,6 +22,11 @@ public class ToggleAspect extends GuiButton implements ConfigAspect, HoverableAs
         this.toggleObject = toggleObject;
         this.settingName = toggleObject.getName();
         this.hoverText = toggleObject.getDescription();
+    }
+
+    @Override
+    public ConfigCategory getConfigCategory() {
+        return toggleObject.getConfigCategory();
     }
 
     public void render(int mouseX, int mouseY) {

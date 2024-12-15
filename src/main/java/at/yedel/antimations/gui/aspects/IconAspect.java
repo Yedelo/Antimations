@@ -10,8 +10,8 @@ import net.minecraft.util.ResourceLocation;
 
 
 public class IconAspect extends GuiButton implements HoverableAspect {
-    private ResourceLocation iconLocation;
-    private String hoverText;
+    private final ResourceLocation iconLocation;
+    private final String hoverText;
 
     public IconAspect(int buttonId, int x, int y, int width, int height, ResourceLocation iconLocation, String hoverText) {
         super(buttonId, x, y, width, height, "");

@@ -8,9 +8,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import at.yedel.antimations.Antimations;
 import at.yedel.antimations.config.AntimationsConfig;
+import at.yedel.antimations.config.ConfigCategory;
 import at.yedel.antimations.config.ToggleObject;
 import at.yedel.antimations.gui.aspects.ConfigAspect;
 import at.yedel.antimations.gui.aspects.HoverableAspect;
@@ -19,7 +21,6 @@ import at.yedel.antimations.gui.aspects.NextPageButton;
 import at.yedel.antimations.gui.aspects.PreviousPageButton;
 import at.yedel.antimations.gui.aspects.ToggleAspect;
 import at.yedel.antimations.utils.Colorful;
-import at.yedel.antimations.utils.FlowArrayList;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
@@ -29,25 +30,22 @@ import org.lwjgl.input.Keyboard;
 
 public class AntimationsGui extends GuiScreen implements Colorful {
 	private final GuiScreen parentScreen;
-	private final URI modrinthUri = URI.create("https://modrinth.com/project/antimations");
-	private final URI githubUri = URI.create("https://github.com/Yedelo/Antimations");
+
 	private int midpoint;
 	private int currentButtonId;
 	private ArrayList<HoverableAspect> hoverableAspects;
+	private final List<ConfigAspect> configAspects = new ArrayList<>();
+	private final ConfigCategory[] configCategories = ConfigCategory.values();
+	private ConfigCategory currentConfigCategory;
+	private int currentPageNumber;
+	private List<ConfigAspect> currentConfigAspects;
+
+	private final URI modrinthUri = URI.create("https://modrinth.com/project/antimations");
+	private final URI githubUri = URI.create("https://github.com/Yedelo/Antimations");
 	private IconAspect modrinthButton;
 	private IconAspect githubButton;
 	private PreviousPageButton previousPageButton;
 	private NextPageButton nextPageButton;
-	private final List<ConfigAspect> swingCustomizationAspects = new ArrayList<>();
-	private final List<ConfigAspect> itemResetAspects = new ArrayList<>();
-	private final List<ConfigAspect> otherAspects = new ArrayList<>();
-	private final List<ConfigAspect> configAspects = new ArrayList<>();
-	private final ConfigPage swingCustomizationPage = new ConfigPage("Swing Customization", swingCustomizationAspects);
-	private final ConfigPage itemResetPage = new ConfigPage("Item Reset Customizaion", itemResetAspects);
-	private final ConfigPage otherPage = new ConfigPage("Other", otherAspects);
-	private final FlowArrayList<ConfigPage> configPages = new FlowArrayList<>();
-	private ConfigPage currentConfigPage;
-	private int currentPageNumber;
 	private GuiButton resetButton;
 	private GuiButton doneButton;
 	private GuiButton openConfigFileButton;
@@ -69,7 +67,6 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		buttonList.add(nextPageButton = new NextPageButton(buttonId(), midpoint + 85, height - 39));
 
 		setupConfigAspects();
-		setupConfigPages();
 
 		hoverableAspects = new ArrayList<>();
 		hoverableAspects.add(modrinthButton);
@@ -86,8 +83,8 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		buttonList.add(doneButton = new GuiButton(buttonId(), midpoint - 75, height - 25, 150, 20, "Done"));
 		buttonList.add(openConfigFileButton = new GuiButton(buttonId(), width - 105, height - 25, 100, 20, "Open Config File"));
 
-		currentConfigPage = configPages.get(0);
 		currentPageNumber = 1;
+		updateConfigCategory();
 	}
 
 	@Override
@@ -95,13 +92,15 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj, "Antimations " + Antimations.version + " by Yedel", midpoint, 5, WHITE);
 		drawHorizontalLine(175, width - 175, 45, GRAY);
-		String pageInfoString = currentConfigPage.getTitle() + " (Page " + currentPageNumber + "/3)";
+		String pageInfoString = currentConfigCategory.getName() + " (Page " + currentPageNumber + "/" + configCategories.length + ")";
 		drawCenteredString(fontRendererObj, pageInfoString, midpoint, 50, WHITE);
 		drawString(fontRendererObj, Antimations.totalVersionString, 5, height - fontRendererObj.FONT_HEIGHT - 5, GRAY);
 		for (GuiButton button: buttonList) {
 			button.drawButton(mc, mouseX, mouseY);
 		}
-		currentConfigPage.drawScreen(mouseX, mouseY);
+		for (ConfigAspect configAspect: currentConfigAspects) {
+			configAspect.render(mouseX, mouseY);
+		}
 		for (HoverableAspect hoverableAspect: hoverableAspects) {
 			if (hoverableAspect.isHovered()) {
 				drawCreativeTabHoveringText(hoverableAspect.getHoverText(), mouseX, mouseY);
@@ -118,12 +117,14 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 			Desktop.getDesktop().browse(githubUri);
 		}
 		else if (button == previousPageButton) {
-			currentConfigPage = configPages.getPreviousElement(currentConfigPage);
-			currentPageNumber = configPages.indexOf(currentConfigPage) + 1;
+			currentPageNumber --;
+			if (currentPageNumber == 0) currentPageNumber = 3;
+			updateConfigCategory();
 		}
 		else if (button == nextPageButton) {
-			currentConfigPage = configPages.getNextElement(currentConfigPage);
-			currentPageNumber = configPages.indexOf(currentConfigPage) + 1;
+			currentPageNumber ++;
+			if (currentPageNumber > configCategories.length) currentPageNumber = 1;
+			updateConfigCategory();
 		}
 		else if (button == resetButton) {
 			if (Objects.equals(button.displayString, "Reset")) {
@@ -146,7 +147,9 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
 		super.mouseClicked(mouseX, mouseY, mouseButton);
-		currentConfigPage.onClick(mouseX, mouseY, mouseButton);
+		for (ConfigAspect configAspect: currentConfigAspects) {
+			configAspect.onClick(mouseX, mouseY, mouseButton);
+		}
 	}
 
 	@Override
@@ -161,56 +164,34 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		AntimationsConfig.getInstance().save();
 	}
 
+	private void updateConfigCategory() {
+		currentConfigCategory = configCategories[currentPageNumber - 1];
+		currentConfigAspects = configAspects.stream().filter(configAspect -> configAspect.getConfigCategory() == currentConfigCategory).collect(Collectors.toList());
+	}
+
 	// Stuff is moved into functions at the bottom to make it so that code above this comment doesn't have to be updated for new features
 
 	private void setupConfigAspects() {
-		setupSwingCustomizationAspects();
-		setupItemResetAspects();
-		setupOtherAspects();
-		addConfigAspects();
+		configAspects.clear();
+		addToggleAspect(AntimationsConfig.getInstance().cancelCreeperIgnitionSwings, midpoint - 112, 65, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelFishingRodSwings, midpoint - 112, 90, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelBlockHitSwings, midpoint - 112, 115, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelAirOrEntitySwings, midpoint - 112, 140, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelBlockInteractSwings, midpoint - 112, 165, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelOtherPlayerSwings, midpoint - 112, 190, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelItemUseHandResets, midpoint - 112, 65, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelItemUpdateHandResets, midpoint - 112, 90, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelAllHandResets, midpoint - 112, 115, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelOwnBlockAnimations, midpoint - 112, 65, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations, midpoint - 125, 90, 250);
+		addToggleAspect(AntimationsConfig.getInstance().cancelOwnBowAnimations, midpoint - 112, 115, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelThirdPersonBowAnimations, midpoint - 125, 140, 250);
+		addToggleAspect(AntimationsConfig.getInstance().cancelEatingAnimations, midpoint - 112, 165, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelDrinkingAnimations, midpoint - 112, 190, 225);
 	}
 
-	private void setupSwingCustomizationAspects() {
-		swingCustomizationAspects.clear();
-		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelCreeperIgnitionSwings, midpoint - 112, 65, 225);
-		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelFishingRodSwings, midpoint - 112, 90, 225);
-		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelBlockHitSwings, midpoint - 112, 115, 225);
-		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelAirOrEntitySwings, midpoint - 112, 140, 225);
-		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelBlockInteractSwings, midpoint - 112, 165, 225);
-		addToggleAspect(swingCustomizationAspects, AntimationsConfig.getInstance().cancelOtherPlayerSwings, midpoint - 112, 190, 225);
-	}
-
-	private void setupItemResetAspects() {
-		itemResetAspects.clear();
-		addToggleAspect(itemResetAspects, AntimationsConfig.getInstance().cancelItemUseHandResets, midpoint - 112, 65, 225);
-		addToggleAspect(itemResetAspects, AntimationsConfig.getInstance().cancelItemUpdateHandResets, midpoint - 112, 90, 225);
-		addToggleAspect(itemResetAspects, AntimationsConfig.getInstance().cancelAllHandResets, midpoint - 112, 115, 225);
-	}
-
-	private void setupOtherAspects() {
-		otherAspects.clear();
-		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelOwnBlockAnimations, midpoint - 112, 65, 225);
-		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations, midpoint - 125, 90, 250);
-		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelOwnBowAnimations, midpoint - 112, 115, 225);
-		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelThirdPersonBowAnimations, midpoint - 125, 140, 250);
-		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelEatingAnimations, midpoint - 112, 165, 225);
-		addToggleAspect(otherAspects, AntimationsConfig.getInstance().cancelDrinkingAnimations, midpoint - 112, 190, 225);
-	}
-
-	private void addConfigAspects() {
-		configAspects.addAll(swingCustomizationAspects);
-		configAspects.addAll(itemResetAspects);
-		configAspects.addAll(otherAspects);
-	}
-
-	private void setupConfigPages() {
-		configPages.add(swingCustomizationPage);
-		configPages.add(itemResetPage);
-		configPages.add(otherPage);
-	}
-
-	private void addToggleAspect(List<ConfigAspect> aspectList, ToggleObject toggleObject, int x, int y, int width) {
-		aspectList.add(new ToggleAspect(toggleObject, buttonId(), x, y, width));
+	private void addToggleAspect(ToggleObject toggleObject, int x, int y, int width) {
+		configAspects.add(new ToggleAspect(toggleObject, buttonId(), x, y, width));
 	}
 
 	private int buttonId() {

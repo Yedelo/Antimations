@@ -34,6 +34,8 @@ public class AntimationsConfig {
     public ToggleObject cancelThirdPersonBowAnimations;
     public ToggleObject cancelEatingAnimations;
     public ToggleObject cancelDrinkingAnimations;
+    public ToggleObject cancelOwnLimbMovements;
+    public ToggleObject cancelOtherLimbMovements;
 
     public void setupConfig(File recommendedConfigFile) {
         config = new Configuration(recommendedConfigFile);
@@ -144,6 +146,20 @@ public class AntimationsConfig {
             "Cancel first person drinking animations.",
             ConfigCategory.OTHER,
             "cancelDrinkingAnimations",
+            false
+        );
+        cancelOwnLimbMovements = new ToggleObject(
+            "Cancel Own Limb Movements",
+            "Cancel your own limb movements.",
+            ConfigCategory.OTHER,
+            "cancelOwnLimbMovements",
+            false
+        );
+        cancelOtherLimbMovements = new ToggleObject(
+            "Cancel Other Limb Movements",
+            "Cancels limb movements from other players. Is quite terrifying when you are being chased.",
+            ConfigCategory.OTHER,
+            "cancelOtherLimbMovements",
             false
         );
 

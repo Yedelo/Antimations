@@ -179,15 +179,19 @@ public class AntimationsGui extends GuiScreen implements Colorful {
 		addToggleAspect(AntimationsConfig.getInstance().cancelAirOrEntitySwings, midpoint - 112, 140, 225);
 		addToggleAspect(AntimationsConfig.getInstance().cancelBlockInteractSwings, midpoint - 112, 165, 225);
 		addToggleAspect(AntimationsConfig.getInstance().cancelOtherPlayerSwings, midpoint - 112, 190, 225);
+
 		addToggleAspect(AntimationsConfig.getInstance().cancelItemUseHandResets, midpoint - 112, 65, 225);
 		addToggleAspect(AntimationsConfig.getInstance().cancelItemUpdateHandResets, midpoint - 112, 90, 225);
 		addToggleAspect(AntimationsConfig.getInstance().cancelAllHandResets, midpoint - 112, 115, 225);
+
 		addToggleAspect(AntimationsConfig.getInstance().cancelOwnBlockAnimations, midpoint - 112, 65, 225);
 		addToggleAspect(AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations, midpoint - 125, 90, 250);
 		addToggleAspect(AntimationsConfig.getInstance().cancelOwnBowAnimations, midpoint - 112, 115, 225);
 		addToggleAspect(AntimationsConfig.getInstance().cancelThirdPersonBowAnimations, midpoint - 125, 140, 250);
 		addToggleAspect(AntimationsConfig.getInstance().cancelEatingAnimations, midpoint - 112, 165, 225);
 		addToggleAspect(AntimationsConfig.getInstance().cancelDrinkingAnimations, midpoint - 112, 190, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelOwnLimbMovements, midpoint - 112, 215, 225);
+		addToggleAspect(AntimationsConfig.getInstance().cancelOtherLimbMovements, midpoint - 112, 240, 225);
 	}
 
 	private void addToggleAspect(ToggleObject toggleObject, int x, int y, int width) {

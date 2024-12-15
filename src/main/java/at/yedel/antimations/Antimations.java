@@ -14,10 +14,12 @@ import at.yedel.antimations.utils.AntimationsPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.realms.RealmsSharedConstants;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -74,6 +76,18 @@ public class Antimations {
         ClientCommandHandler.instance.registerCommand(new AntimationsCommand());
         MinecraftForge.EVENT_BUS.register(this);
         itemModelMesher = minecraft.getRenderItem().getItemModelMesher();
+    }
+
+    @SubscribeEvent
+    public void cancelLimbMovements(RenderLivingEvent.Pre event) {
+        EntityLivingBase entity = event.entity;
+        if (
+            AntimationsConfig.getInstance().cancelOwnLimbMovements.get() && entity == minecraft.thePlayer
+            ||
+            AntimationsConfig.getInstance().cancelOtherLimbMovements.get() && entity != minecraft.thePlayer
+        ) {
+            entity.limbSwingAmount = 0;
+        }
     }
 
     // For some reason, Forge rejects clients trying to connect to servers with this mod, even though it is client side only.

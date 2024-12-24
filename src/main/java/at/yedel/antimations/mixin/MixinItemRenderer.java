@@ -4,7 +4,6 @@ package at.yedel.antimations.mixin;
 
 import at.yedel.antimations.config.AntimationsConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.EnumAction;
@@ -35,8 +34,8 @@ public abstract class MixinItemRenderer {
 		return instance.getIsItemStackEqual(p_179549_1_);
 	}
 
-	@Redirect(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;getItemInUseCount()I"))
-	private int antimations$cancelFirstPersonAnimations(AbstractClientPlayer instance) {
+	@Redirect(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getItemUseAction()Lnet/minecraft/item/EnumAction;"))
+	private EnumAction antimations$cancelFirstPersonAnimations(ItemStack instance) {
 		EnumAction itemUseAction = itemToRender.getItemUseAction();
 		if (
 			(AntimationsConfig.getInstance().cancelOwnBlockAnimations.get() && itemUseAction == EnumAction.BLOCK)
@@ -47,9 +46,9 @@ public abstract class MixinItemRenderer {
 			||
 			(AntimationsConfig.getInstance().cancelDrinkingAnimations.get() && itemUseAction == EnumAction.DRINK)
 		) {
-			return 0;
+			return EnumAction.NONE;
 		}
-		else return instance.getItemInUseDuration();
+		else return instance.getItemUseAction();
 	}
 
 	@Inject(method = "resetEquippedProgress", at = @At("HEAD"), cancellable = true)

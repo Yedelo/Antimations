@@ -1,16 +1,12 @@
 [
   {
-    "modid": "antimations",
-    "name": "Antimations",
-    "description": "Cancels swing and other animations on players. Packets will still be sent so the mod is safe to use for anticheats.\n\nUse /antimations or the config button in the mod list to open the menu.",
-    "version": "${version}",
-    "mcversion": "1.8.9",
+    "modid": "${mod_id}",
+    "name": "${mod_name}",
+    "description": "${mod_description}",
+    "version": "${mod_version}",
+    "mcversion": "${mc_version}",
     "url": "https://modrinth.com/project/antimations",
     "updateUrl": "",
-    "authorList": [
-      "Yedel"
-    ],
-    "credits": "nea89o for example mod",
-    "logoFile": "assets/antimations/icon.png"
+    "logoFile": "assets/antimations/antimations.png"
   }
 ]

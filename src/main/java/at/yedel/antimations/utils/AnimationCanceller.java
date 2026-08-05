@@ -2,9 +2,8 @@ package at.yedel.antimations.utils;
 
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C0APacketAnimation;
-
-import static at.yedel.antimations.Antimations.minecraft;
 
 
 
@@ -13,6 +12,6 @@ public class AnimationCanceller {
     // which has the call to send the swing packet. We still need to send this packet, so lets replace
     // swingItem with sending the animation packet.
     public static void sendAnimationPacket() {
-        minecraft.getNetHandler().addToSendQueue(new C0APacketAnimation());
+        Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C0APacketAnimation());
     }
 }

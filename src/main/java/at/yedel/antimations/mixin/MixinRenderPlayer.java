@@ -21,10 +21,10 @@ public abstract class MixinRenderPlayer {
     @Inject(method = "setModelVisibilities", at = @At("TAIL"))
     private void antimations$removeStatuses(AbstractClientPlayer clientPlayer, CallbackInfo ci) {
         ModelPlayer modelPlayer = getMainModel();
-        if (AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations.get() && modelPlayer.heldItemRight == 3) {
+        if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelThirdPersonBlockAnimations && modelPlayer.heldItemRight == 3) {
             modelPlayer.heldItemRight = 1;
         }
-        if (AntimationsConfig.getInstance().cancelThirdPersonBowAnimations.get()) {
+        if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelThirdPersonBowAnimations) {
             modelPlayer.aimedBow = false;
         }
     }

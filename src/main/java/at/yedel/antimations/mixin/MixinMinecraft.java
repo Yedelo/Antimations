@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class MixinMinecraft {
 	@Redirect(method = "sendClickBlockToController", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
 	private void antimations$onSwingAtBlock(EntityPlayerSP instance) {
-		if (AntimationsConfig.getInstance().cancelBlockHitSwings.get()) {
+		if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelBlockHitSwings) {
 			AnimationCanceller.sendAnimationPacket();
 		}
 		else instance.swingItem();
@@ -24,7 +24,7 @@ public abstract class MixinMinecraft {
 
 	@Redirect(method = "clickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
 	private void antimations$onSwingBareOrAtEntity(EntityPlayerSP instance) {
-		if (AntimationsConfig.getInstance().cancelAirOrEntitySwings.get()) {
+		if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelAirOrEntitySwings) {
 			AnimationCanceller.sendAnimationPacket();
 		}
 		else instance.swingItem();
@@ -32,7 +32,7 @@ public abstract class MixinMinecraft {
 
 	@Redirect(method = "rightClickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
 	private void antimations$onInteractWithBlock(EntityPlayerSP instance) {
-		if (AntimationsConfig.getInstance().cancelBlockInteractSwings.get()) {
+		if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelBlockInteractSwings) {
 			AnimationCanceller.sendAnimationPacket();
 		}
 		else instance.swingItem();

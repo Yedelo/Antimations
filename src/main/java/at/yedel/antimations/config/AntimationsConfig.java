@@ -4,169 +4,153 @@ package at.yedel.antimations.config;
 
 import java.io.File;
 
+import cc.polyfrost.oneconfig.config.Config;
+import cc.polyfrost.oneconfig.config.annotations.Switch;
+import cc.polyfrost.oneconfig.config.data.Mod;
+import cc.polyfrost.oneconfig.config.data.ModType;
+import cc.polyfrost.oneconfig.config.migration.VigilanceMigrator;
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 
 
 
-public class AntimationsConfig {
-    private static final AntimationsConfig instance = new AntimationsConfig();
-    
+public class AntimationsConfig extends Config {
+    private static final AntimationsConfig INSTANCE = new AntimationsConfig();
+
     public static AntimationsConfig getInstance() {
-        return instance;
-    }
-    
-    public Configuration config;
-
-    public ToggleObject cancelCreeperIgnitionSwings;
-    public ToggleObject cancelFishingRodSwings;
-    public ToggleObject cancelBlockHitSwings; // might be confusing, not blockhitting but when you hit a block
-    public ToggleObject cancelAirOrEntitySwings;
-    public ToggleObject cancelBlockInteractSwings;
-    public ToggleObject cancelOtherPlayerSwings;
-
-    public ToggleObject cancelItemUseHandResets;
-    public ToggleObject cancelItemUpdateHandResets;
-    public ToggleObject cancelAllHandResets;
-
-    public ToggleObject cancelOwnBlockAnimations;
-    public ToggleObject cancelThirdPersonBlockAnimations;
-    public ToggleObject cancelOwnBowAnimations;
-    public ToggleObject cancelThirdPersonBowAnimations;
-    public ToggleObject cancelEatingAnimations;
-    public ToggleObject cancelDrinkingAnimations;
-    public ToggleObject cancelOwnLimbMovements;
-    public ToggleObject cancelOtherLimbMovements;
-
-    public void setupConfig(File recommendedConfigFile) {
-        config = new Configuration(recommendedConfigFile);
-        config.load();
-
-        cancelCreeperIgnitionSwings = new ToggleObject(
-            "Cancel Creeper Ignition Swings",
-            "Cancel swinging your hand when igniting a creeper.",
-            ConfigCategory.SWING_CUSTOMIZATION,
-            "cancelCreeperIgnitionSwings",
-            true
-        );
-        cancelFishingRodSwings = new ToggleObject(
-            "Cancel Fishing Rod Swings",
-            "Cancel swinging your hand when using a fishing rod.",
-            ConfigCategory.SWING_CUSTOMIZATION,
-            "cancelFishingRodSwings",
-            true
-        );
-        cancelBlockHitSwings = new ToggleObject(
-            "Cancel Block Hit Swings",
-            "Cancel swinging your hand when hitting a block.",
-            ConfigCategory.SWING_CUSTOMIZATION,
-            "cancelBlockHitSwings",
-            true
-        );
-        cancelAirOrEntitySwings = new ToggleObject(
-            "Cancel Air or Entity Swings",
-            "Cancel swinging your hand when swinging at the air or at an entity.",
-            ConfigCategory.SWING_CUSTOMIZATION,
-            "cancelAirOrEntitySwings",
-            true
-        );
-        cancelBlockInteractSwings = new ToggleObject(
-            "Cancel Block Interact Swings",
-            "Cancel swinging your hand when interacting with blocks.",
-            ConfigCategory.SWING_CUSTOMIZATION,
-            "cancelBlockInteractSwings",
-            true
-        );
-        cancelOtherPlayerSwings = new ToggleObject(
-            "Cancel Other Player Swings",
-            "Cancel swing animations from other players.",
-            ConfigCategory.SWING_CUSTOMIZATION,
-            "cancelOtherPlayerSwings",
-            false
-        );
-
-        cancelItemUseHandResets = new ToggleObject(
-            "Cancel Item Use Hand Resets",
-            "Cancel your hand doing the re-equip animation when using an item.",
-            ConfigCategory.ITEM_RESET,
-            "cancelItemUseHandResets",
-            true
-        );
-        cancelItemUpdateHandResets = new ToggleObject(
-            "Cancel Item Update Hand Resets",
-            "Cancel your hand doing the re-equip animation when your item updates (durability, lore...).",
-            ConfigCategory.ITEM_RESET,
-            "cancelItemUpdateHandResets",
-            true
-        );
-        cancelAllHandResets = new ToggleObject(
-            "Cancel All Hand Resets",
-            "Always cancel your hand doing the re-equip animation. Not recommended because switching between different items doesn't look smooth.",
-            ConfigCategory.ITEM_RESET,
-            "cancelAllHandResets",
-            false
-        );
-
-        cancelOwnBlockAnimations = new ToggleObject(
-            "Cancel Own Block Animations",
-            "Cancel your own blocking animations in first person.",
-            ConfigCategory.OTHER,
-            "cancelOwnBlockAnimations",
-            false
-        );
-        cancelThirdPersonBlockAnimations = new ToggleObject(
-            "Cancel Third Person Block Animations",
-            "Cancel third person blocking animations from you and other players.",
-            ConfigCategory.OTHER,
-            "cancelThirdPersonBlockAnimations",
-            false
-        );
-        cancelOwnBowAnimations = new ToggleObject(
-            "Cancel Own Bow Animations",
-            "Cancel your own bow animations in first person. §eArrow models will still be drawn.",
-            ConfigCategory.OTHER,
-            "cancelOwnBowAnimations",
-            false
-        );
-        cancelThirdPersonBowAnimations = new ToggleObject(
-            "Cancel Third Person Bow Animations",
-            "Cancel third person bow animations from you and other players. §eArrow models will still be drawn.",
-            ConfigCategory.OTHER,
-            "cancelThirdPersonBowAnimations",
-            false
-        );
-        cancelEatingAnimations = new ToggleObject(
-            "Cancel Eating Animations",
-            "Cancel first person eating animations.",
-            ConfigCategory.OTHER,
-            "cancelEatingAnimations",
-            false
-        );
-        cancelDrinkingAnimations = new ToggleObject(
-            "Cancel Drinking Animations",
-            "Cancel first person drinking animations.",
-            ConfigCategory.OTHER,
-            "cancelDrinkingAnimations",
-            false
-        );
-        cancelOwnLimbMovements = new ToggleObject(
-            "Cancel Own Limb Movements",
-            "Cancel your own limb movements.",
-            ConfigCategory.OTHER,
-            "cancelOwnLimbMovements",
-            false
-        );
-        cancelOtherLimbMovements = new ToggleObject(
-            "Cancel Other Limb Movements",
-            "Cancels limb movements from other players. Is quite terrifying when you are being chased.",
-            ConfigCategory.OTHER,
-            "cancelOtherLimbMovements",
-            false
-        );
-
-        if (config.hasChanged()) config.save();
+        return INSTANCE;
     }
 
-    public void save() {
-        config.save();
+    private AntimationsConfig() {
+        super(
+            new Mod(
+                "Antimations",
+                ModType.UTIL_QOL,
+                "/assets/antimations/antimations.png"
+            ),
+            "antimations.json",
+            true,
+            true
+        );
+        initialize();
     }
+
+    @Switch(
+        name = "Cancel Creeper Ignition Swings",
+        description = "Cancel swinging your hand when igniting a creeper.",
+        category = "Swing Customization"
+    )
+    public boolean cancelCreeperIgnitionSwings = true;
+
+    @Switch(
+        name = "Cancel Fishing Rod Swings",
+        description = "Cancel swinging your hand when using a fishing rod.",
+        category = "Swing Customization"
+    )
+    public boolean cancelFishingRodSwings = true;
+
+    @Switch(
+        name = "Cancel Block Hit Swings",
+        description = "Cancel swinging your hand when hitting a block.",
+        category = "Swing Customization"
+    )
+    public boolean cancelBlockHitSwings = true;
+
+    @Switch(
+        name = "Cancel Air or Entity Swings",
+        description = "Cancel swinging your hand when swinging at the air or at an entity.",
+        category = "Swing Customization"
+    )
+    public boolean cancelAirOrEntitySwings = true;
+
+    @Switch(
+        name = "Cancel Block Interact Swings",
+        description = "Cancel swinging your hand when interacting with blocks.",
+        category = "Swing Customization"
+    )
+    public boolean cancelBlockInteractSwings = true;
+
+    @Switch(
+        name = "Cancel Other Player Swings",
+        description = "Cancel swing animations from other players.",
+        category = "Swing Customization"
+    )
+    public boolean cancelOtherPlayerSwings = false;
+
+    @Switch(
+        name = "Cancel Item Use Hand Resets",
+        description = "Cancel your hand doing the re-equip animation when using an item.",
+        category = "Item Reset"
+    )
+    public boolean cancelItemUseHandResets = true;
+
+    @Switch(
+        name = "Cancel Item Update Hand Resets",
+        description = "Cancel your hand doing the re-equip animation when your item updates (durability, lore...).",
+        category = "Item Reset"
+    )
+    public boolean cancelItemUpdateHandResets = true;
+
+    @Switch(
+        name = "Cancel All Hand Resets",
+        description = "Always cancel your hand doing the re-equip animation. Not recommended because switching between different items doesn't look smooth.",
+        category = "Item Reset"
+    )
+    public boolean cancelAllHandResets = false;
+
+    @Switch(
+        name = "Cancel Own Block Animations",
+        description = "Cancel your own blocking animations in first person.",
+        category = "Other"
+    )
+    public boolean cancelOwnBlockAnimations = false;
+
+    @Switch(
+        name = "Cancel Third Person Block Animations",
+        description = "Cancel third person blocking animations from you and other players.",
+        category = "Other"
+    )
+    public boolean cancelThirdPersonBlockAnimations = false;
+
+    @Switch(
+        name = "Cancel Own Bow Animations",
+        description = "Cancel your own bow animations in first person. §eArrow models will still be drawn.",
+        category = "Other"
+    )
+    public boolean cancelOwnBowAnimations = false;
+
+    @Switch(
+        name = "Cancel Third Person Bow Animations",
+        description = "Cancel third person bow animations from you and other players. §eArrow models will still be drawn.",
+        category = "Other"
+    )
+    public boolean cancelThirdPersonBowAnimations = false;
+
+    @Switch(
+        name = "Cancel Eating Animations",
+        description = "Cancel first person eating animations.",
+        category = "Other"
+    )
+    public boolean cancelEatingAnimations = false;
+
+    @Switch(
+        name = "Cancel Drinking Animations",
+        description = "Cancel first person drinking animations.",
+        category = "Other"
+    )
+    public boolean cancelDrinkingAnimations = false;
+
+    @Switch(
+        name = "Cancel Own Limb Movements",
+        description = "Cancel your own limb movements.",
+        category = "Other"
+    )
+    public boolean cancelOwnLimbMovements = false;
+
+    @Switch(
+        name = "Cancel Other Limb Movements",
+        description = "Cancels limb movements from other players. Is quite terrifying when you are being chased.",
+        category = "Other"
+    )
+    public boolean cancelOtherLimbMovements = false;
 }

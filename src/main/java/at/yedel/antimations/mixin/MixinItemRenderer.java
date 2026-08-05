@@ -27,7 +27,7 @@ public abstract class MixinItemRenderer {
 
 	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getIsItemStackEqual(Lnet/minecraft/item/ItemStack;)Z"))
 	private boolean antimations$simplifyEqual(ItemStack instance, ItemStack p_179549_1_) {
-		if (AntimationsConfig.getInstance().cancelItemUpdateHandResets.get()) {
+		if (AntimationsConfig.getInstance().cancelItemUpdateHandResets) {
 			if (equippedItemSlot != mc.thePlayer.inventory.currentItem) return false;
 			return itemRenderer.getItemModelMesher().getItemModel(instance) == itemRenderer.getItemModelMesher().getItemModel(p_179549_1_);
 		}
@@ -38,13 +38,15 @@ public abstract class MixinItemRenderer {
 	private EnumAction antimations$cancelFirstPersonAnimations(ItemStack instance) {
 		EnumAction itemUseAction = itemToRender.getItemUseAction();
 		if (
-			(AntimationsConfig.getInstance().cancelOwnBlockAnimations.get() && itemUseAction == EnumAction.BLOCK)
-			||
-			(AntimationsConfig.getInstance().cancelOwnBowAnimations.get() && itemUseAction == EnumAction.BOW)
-			||
-			(AntimationsConfig.getInstance().cancelEatingAnimations.get() && itemUseAction == EnumAction.EAT)
-			||
-			(AntimationsConfig.getInstance().cancelDrinkingAnimations.get() && itemUseAction == EnumAction.DRINK)
+			AntimationsConfig.getInstance().enabled && (
+				(AntimationsConfig.getInstance().cancelOwnBlockAnimations && itemUseAction == EnumAction.BLOCK)
+					||
+					(AntimationsConfig.getInstance().cancelOwnBowAnimations && itemUseAction == EnumAction.BOW)
+					||
+					(AntimationsConfig.getInstance().cancelEatingAnimations && itemUseAction == EnumAction.EAT)
+					||
+					(AntimationsConfig.getInstance().cancelDrinkingAnimations && itemUseAction == EnumAction.DRINK)
+			)
 		) {
 			return EnumAction.NONE;
 		}
@@ -53,14 +55,14 @@ public abstract class MixinItemRenderer {
 
 	@Inject(method = "resetEquippedProgress", at = @At("HEAD"), cancellable = true)
 	private void antimations$onUseItem(CallbackInfo ci) {
-		if (AntimationsConfig.getInstance().cancelItemUseHandResets.get()) {
+		if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelItemUseHandResets) {
 			ci.cancel();
 		}
 	}
 
 	@Inject(method = "resetEquippedProgress2", at = @At("HEAD"), cancellable = true)
 	private void antimations$onConsumeItem(CallbackInfo ci) {
-		if (AntimationsConfig.getInstance().cancelItemUseHandResets.get()) {
+		if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelItemUseHandResets) {
 			ci.cancel();
 		}
 	}

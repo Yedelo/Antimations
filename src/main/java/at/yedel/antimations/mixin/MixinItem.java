@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinItem {
 	@Inject(method = "shouldCauseReequipAnimation", at = @At("HEAD"), cancellable = true, remap = false)
 	private void antimations$cancelAllItemResets(ItemStack oldStack, ItemStack newStack, boolean slotChanged, CallbackInfoReturnable<Boolean> cir) {
-		if (AntimationsConfig.getInstance().cancelAllHandResets.get()) cir.setReturnValue(false);
+		if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelAllHandResets) {
+			cir.setReturnValue(false);
+		}
 	}
 }

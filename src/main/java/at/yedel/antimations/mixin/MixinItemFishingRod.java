@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinItemFishingRod {
     @Redirect(method = "onItemRightClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
     private void antimations$onUseFishingRod(EntityPlayer instance) {
-        if (AntimationsConfig.getInstance().cancelFishingRodSwings.get()) {
+        if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelFishingRodSwings) {
             AnimationCanceller.sendAnimationPacket();
         }
         else instance.swingItem();

@@ -15,9 +15,9 @@ import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.server.S0BPacketAnimation;
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -27,7 +27,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import net.minecraftforge.fml.common.network.NetworkCheckHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -41,10 +40,10 @@ import net.minecraftforge.fml.relauncher.Side;
 )
 public class Antimations {
     @Instance
-    private static Antimations instance;
+    private static Antimations INSTANCE;
 
     public static Antimations getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     public static ItemModelMesher itemModelMesher;
@@ -61,12 +60,16 @@ public class Antimations {
     public void cancelLimbMovements(RenderLivingEvent.Pre event) {
         if (!AntimationsConfig.getInstance().enabled) return;
         EntityLivingBase entity = event.entity;
+        boolean isPlayer = entity == Minecraft.getMinecraft().thePlayer;
         if (
-            AntimationsConfig.getInstance().cancelOwnLimbMovements && entity == Minecraft.getMinecraft().thePlayer
-            ||
-            AntimationsConfig.getInstance().cancelOtherLimbMovements && entity != Minecraft.getMinecraft().thePlayer
+            (AntimationsConfig.getInstance().cancelOwnLimbMovements && isPlayer) || (AntimationsConfig.getInstance().cancelOtherLimbMovements && !isPlayer)
         ) {
-            entity.limbSwingAmount = 0;
+            entity.limbSwingAmount *= AntimationsConfig.getInstance().cancelLimbScalingMultiplier;
+        }
+        else if (
+            (AntimationsConfig.getInstance().weirderOwnLimbMovements && isPlayer) || (AntimationsConfig.getInstance().weirderOtherLimbMovements && !isPlayer)
+        ) {
+            entity.limbSwing *= AntimationsConfig.getInstance().weirderLimbScalingMultiplier;
         }
     }
 

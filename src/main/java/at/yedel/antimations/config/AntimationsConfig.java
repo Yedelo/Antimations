@@ -2,15 +2,11 @@ package at.yedel.antimations.config;
 
 
 
-import java.io.File;
-
 import cc.polyfrost.oneconfig.config.Config;
+import cc.polyfrost.oneconfig.config.annotations.Slider;
 import cc.polyfrost.oneconfig.config.annotations.Switch;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
-import cc.polyfrost.oneconfig.config.migration.VigilanceMigrator;
-import net.minecraftforge.common.config.ConfigCategory;
-import net.minecraftforge.common.config.Configuration;
 
 
 
@@ -153,4 +149,36 @@ public class AntimationsConfig extends Config {
         category = "Other"
     )
     public boolean cancelOtherLimbMovements = false;
+
+    @Slider(
+        name = "Scaling Multiplier",
+        description = "The multiplier to modify limb movements by.",
+        category = "Other",
+        min = -2f,
+        max = 2f
+    )
+    public float cancelLimbScalingMultiplier = 0f;
+
+    @Switch(
+        name = "Weirder Own Limb Movements",
+        description = "Cancel your own limbs from moving after they already started (or are in the \"top\" of their movement).",
+        category = "Other"
+    )
+    public boolean weirderOwnLimbMovements = false;
+
+    @Switch(
+        name = "Weirder Other Limb Movements",
+        description = "Cancel other player's limbs from moving after they already started (or are in the \"top\" of their movement).",
+        category = "Other"
+    )
+    public boolean weirderOtherLimbMovements = false;
+
+    @Slider(
+        name = "Scaling Multiplier",
+        description = "The multiplier to modify limb movements by.",
+        category = "Other",
+        min = -2f,
+        max = 2f
+    )
+    public float weirderLimbScalingMultiplier = 0f;
 }

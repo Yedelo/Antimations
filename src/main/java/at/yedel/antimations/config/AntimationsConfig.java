@@ -32,39 +32,46 @@ public class AntimationsConfig extends Config {
     }
 
     @Switch(
-        name = "Cancel Air or Entity Swings",
-        description = "Cancel swinging your hand when swinging at the air or at an entity.",
+        name = "Cancel Air Swings",
+        description = "Cancel swinging your hand at the air.",
         category = "Swing Customization"
     )
-    public boolean cancelAirOrEntitySwings = true;
+    public boolean cancelAirSwings = false;
+
+    @Switch(
+        name = "Cancel Entity Hit Swings",
+        description = "Cancel swinging your hand when hitting an entity.",
+        category = "Swing Customization"
+    )
+    public boolean cancelEntityHitSwings = false;
 
     @Switch(
         name = "Cancel Block Hit Swings",
         description = "Cancel swinging your hand when hitting a block.",
         category = "Swing Customization"
     )
-    public boolean cancelBlockHitSwings = true;
+    public boolean cancelBlockHitSwings = false;
 
     @Switch(
         name = "Cancel Block Interact Swings",
         description = "Cancel swinging your hand when interacting with blocks.",
         category = "Swing Customization"
     )
-    public boolean cancelBlockInteractSwings = true;
+    public boolean cancelBlockInteractSwings = false;
 
     @Switch(
         name = "Cancel Fishing Rod Swings",
         description = "Cancel swinging your hand when using a fishing rod.",
         category = "Swing Customization"
     )
-    public boolean cancelFishingRodSwings = true;
+    public boolean cancelFishingRodSwings = false;
 
     @Switch(
         name = "Cancel Creeper Ignition Swings",
         description = "Cancel swinging your hand when igniting a creeper.",
         category = "Swing Customization"
     )
-    public boolean cancelCreeperIgnitionSwings = true;
+    public boolean cancelCreeperIgnitionSwings = false;
 
     @Switch(
         name = "Cancel Other Player Swings",
@@ -78,14 +85,14 @@ public class AntimationsConfig extends Config {
         description = "Cancel your hand doing the re-equip animation when using an item.",
         category = "Item Reset"
     )
-    public boolean cancelItemUseHandResets = true;
+    public boolean cancelItemUseHandResets = false;
 
     @Switch(
         name = "Cancel Item Update Hand Resets",
         description = "Cancel your hand doing the re-equip animation when your item updates (durability, lore...).",
         category = "Item Reset"
     )
-    public boolean cancelItemUpdateHandResets = true;
+    public boolean cancelItemUpdateHandResets = false;
 
     @Switch(
         name = "Cancel All Hand Resets",

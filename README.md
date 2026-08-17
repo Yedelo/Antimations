@@ -8,7 +8,7 @@
 
 ![Modrinth Version](https://img.shields.io/modrinth/v/PSazs4Yz?label=Modrinth%20version)
 
-Cancels swing and other animations on players. Packets will still be sent so the mod is safe to use for anticheats.
+Safe and customizable mod to cancel various gameplay animations
 
 Use /antimations or the config button in the mod list to open the menu.
 

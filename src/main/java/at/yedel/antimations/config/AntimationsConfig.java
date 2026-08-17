@@ -34,7 +34,8 @@ public class AntimationsConfig extends Config {
     @Switch(
         name = "Cancel Air Swings",
         description = "Cancel swinging your hand at the air.",
-        category = "Swing Customization"
+        category = "Swing Customization",
+        size = 2
     )
     public boolean cancelAirSwings = false;
 
@@ -44,6 +45,22 @@ public class AntimationsConfig extends Config {
         category = "Swing Customization"
     )
     public boolean cancelEntityHitSwings = false;
+
+    @Switch(
+        name = "Cancel Only Hurt Entity Swings",
+        description = "Only cancel swinging your hand when hitting hurt entities. Combine this with Cancel Air Swings to make yourself look like a pro timer. Note that some swings may be cancelled because of server delay.",
+        category = "Swing Customization"
+    )
+    public boolean cancelOnlyHurtEntitySwings = false;
+
+    @Slider(
+        name = "Hurt Time Adjustment",
+        description = "Control how long, in ticks, an entity is considered hurt for. Setting this to 10 means that swings will be cancelled for the entire hurt time, while setting this to 1 means that swings will be cancelled for 1 tick after the hurt time.",
+        category = "Swing Customization",
+        min = 1,
+        max = 10
+    )
+    public int hurtTimeAdjustment = 10;
 
     @Switch(
         name = "Cancel Block Hit Swings",

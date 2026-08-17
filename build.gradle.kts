@@ -53,10 +53,8 @@ toolkitLoomHelper {
 tasks {
     jar {
         archiveFileName = "Antimations-$version+${mcData}.jar"
-        manifest.attributes(
-            mapOf(
-                "ModSide" to "CLIENT",
-            )
-        )
+        manifest.attributes(mapOf(
+            "ModSide" to "CLIENT"
+        ))
     }
 }

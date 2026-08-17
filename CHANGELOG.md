@@ -1,6 +1,7 @@
-# **3.0.0**
+# **3.0.1**
 
-- Migrate to OneConfig (v0)
-- Add weirder limb movements
-- Add scaling multipliers
-- Add LGPL-3.0+ license
+- Separate air and entity swings
+- Add cancel only hurt entity swings
+- Add better detection for cancel block hit swings
+- Reorganize swing customization settings
+- Change license to LGPL 3.0 only

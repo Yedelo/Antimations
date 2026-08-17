@@ -16,11 +16,13 @@ Use /antimations or the config button in the mod list to open the menu.
 
 <details><summary>Swing Customization</summary>
 
-- Cancel Creeper Ignition Swings
-- Cancel Fishing Rod Swings
+- Cancel Air Swings
+- Cancel Entity Hit Swings
+- Cancel Only Hurt Entity Swings
 - Cancel Block Hit Swings
-- Cancel Air or Entity Swings
 - Cancel Block Interact Swings
+- Cancel Fishing Rod Swings
+- Cancel Creeper Ignition Swings
 - Cancel Other Player Swings
 
 </details>

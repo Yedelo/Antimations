@@ -32,18 +32,11 @@ public class AntimationsConfig extends Config {
     }
 
     @Switch(
-        name = "Cancel Creeper Ignition Swings",
-        description = "Cancel swinging your hand when igniting a creeper.",
+        name = "Cancel Air or Entity Swings",
+        description = "Cancel swinging your hand when swinging at the air or at an entity.",
         category = "Swing Customization"
     )
-    public boolean cancelCreeperIgnitionSwings = true;
-
-    @Switch(
-        name = "Cancel Fishing Rod Swings",
-        description = "Cancel swinging your hand when using a fishing rod.",
-        category = "Swing Customization"
-    )
-    public boolean cancelFishingRodSwings = true;
+    public boolean cancelAirOrEntitySwings = true;
 
     @Switch(
         name = "Cancel Block Hit Swings",
@@ -53,18 +46,25 @@ public class AntimationsConfig extends Config {
     public boolean cancelBlockHitSwings = true;
 
     @Switch(
-        name = "Cancel Air or Entity Swings",
-        description = "Cancel swinging your hand when swinging at the air or at an entity.",
-        category = "Swing Customization"
-    )
-    public boolean cancelAirOrEntitySwings = true;
-
-    @Switch(
         name = "Cancel Block Interact Swings",
         description = "Cancel swinging your hand when interacting with blocks.",
         category = "Swing Customization"
     )
     public boolean cancelBlockInteractSwings = true;
+
+    @Switch(
+        name = "Cancel Fishing Rod Swings",
+        description = "Cancel swinging your hand when using a fishing rod.",
+        category = "Swing Customization"
+    )
+    public boolean cancelFishingRodSwings = true;
+
+    @Switch(
+        name = "Cancel Creeper Ignition Swings",
+        description = "Cancel swinging your hand when igniting a creeper.",
+        category = "Swing Customization"
+    )
+    public boolean cancelCreeperIgnitionSwings = true;
 
     @Switch(
         name = "Cancel Other Player Swings",

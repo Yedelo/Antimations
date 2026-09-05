@@ -1,0 +1,79 @@
+import kotlin.reflect.KProperty
+
+plugins {
+    id("dev.kikugie.stonecutter")
+}
+
+stonecutter active "1.8.9-forge"
+
+stonecutter parameters {
+    val loader = current.project.split("-")[1]
+    val v0 = properties.getAs<String>("versions.oneconfig").startsWith("0")
+    val v1 = !v0
+
+    constants {
+        match(loader, "forge", "ornithe")
+        this["v0"] = v0
+        this["v1"] = v1
+    }
+
+    replacements {
+        string(v1, "config_bridge") {
+            replace("name =", "title =")
+            replace("allowAlpha", "alpha")
+            replace("OneColor", "PolyColor")
+            replace("getRGB", "getArgb")
+            replace("@KeyBind", "@Keybind")
+            replace("OneKeyBind", "OneConfigKeybind")
+            replace("    @Info(\n" + "        text = ", "    @Info(\n" + "        title = ")
+            replace("type = InfoType.INFO,", "//type = InfoType.INFO,")
+            replace("    @CustomOption(id = \"empty\")\n" + "    @Empty", "    @Info /* command */ ")
+            replace("addListener", "addCallback")
+        }
+
+        string(v1, "command_bridge") {
+            replace("@SubCommand", "@Handler")
+            replace("aliases = ", "value =")
+        }
+
+        string(v1) {
+            replace("cc.polyfrost.oneconfig.utils.Multithreading", "org.polyfrost.oneconfig.utils.v1.Multithreading")
+            replace("cc.polyfrost.oneconfig.libs.eventbus.Subscribe", "org.polyfrost.oneconfig.api.event.v1.invoke.impl.Subscribe")
+            replace("cc.polyfrost.oneconfig.events.event.ChatReceiveEvent", "org.polyfrost.oneconfig.api.event.v1.events.ChatEvent")
+            replace("cc.polyfrost.oneconfig.events.event.ReceivePacketEvent", "org.polyfrost.oneconfig.api.event.v1.events.PacketEvent")
+            replace("cc.polyfrost.oneconfig.events.event.WorldLoadEvent", "org.polyfrost.oneconfig.api.event.v1.events.WorldEvent")
+            replace("cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent", "org.polyfrost.oneconfig.api.platform.v1.Platform")
+            replace("ChatReceiveEvent", "ChatEvent.Receive")
+            replace("ReceivePacketEvent", "PacketEvent.Receive")
+            replace("SendPacketEvent", "PacketEvent.Send")
+            replace("WorldLoadEvent", "WorldEvent.Load")
+            replace("event.packet", "event.getPacket()")
+            replace("UTextComponent.Companion.stripFormatting", "Platform.i18n().getUnformattedText")
+            replace("UChat.chat", "Platform.compatibility().displayChatMessage")
+            replace("UChat.say", "Minecraft.getInstance().player.connection.sendChat")
+            replace("event.isCancelled", "event.cancelled")
+        }
+    }
+
+    val shared = mutableMapOf<String, Any?>()
+    extra[current.project] = shared
+
+    class Declare<T>(private val value: T) {
+        operator fun provideDelegate(thisRef: Any?, property: KProperty<*>): Declare<T> {
+            shared[property.name] = value
+            return this
+        }
+
+        operator fun getValue(thisRef: Any?, property: KProperty<*>): T = value
+    }
+    val modName by Declare(extra["mod.name"])
+    val modId by Declare(extra["mod.id"])
+    val modDescription by Declare(extra["mod.description"])
+    val modIcon by Declare(extra["modIcon"])
+    val fabricLoaderVersion by Declare(properties.getAs<String>("versions.fabricloader"))
+    val oneconfigVersion by Declare(properties.getAs<String>("versions.oneconfig"))
+    val rangedVersion by Declare(properties.getAs<String>("versioning") == "range")
+    val maxMc by Declare(if (rangedVersion) properties.getAs<String>("mc.max") else null)
+    val minecraftTarget by Declare(if (rangedVersion) "${current.version}-$maxMc" else current.version)
+    val finalFileName by Declare("$modName-$version+$minecraftTarget-$loader.jar")
+}

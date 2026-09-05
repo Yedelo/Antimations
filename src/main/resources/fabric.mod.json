@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "name": "${modName}",
+  "id": "${modId}",
+  "description": "${modDescription}",
+  "version": "${version}",
+  "authors": [
+    "Yedel"
+  ],
+  "license": "${license}",
+  "icon": "${modIcon}",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "at.yedel.antimations.Antimations"
+    ]
+  },
+  "mixins": [
+    "mixins.antimations.json"
+  ],
+  "depends": {
+    "java": "${java}",
+    "fabricloader": "${fabricLoader}",
+    "minecraft": "${minecraft}",
+    "oneconfigv1": "${oneconfigv1}",
+    "osl-core": "${oslcore}",
+    "osl-entrypoints": "${oslentrypoints}",
+    "osl-networking": "${oslnetworking}"
+  },
+  "recommends": {
+    "modmenu": "*"
+  },
+  "contact": {
+    "homepage": "https://modrinth.com/mod/${modId}",
+    "issues": "https://github.com/Yedelo/${modName}/issues",
+    "sources": "https://github.com/Yedelo/${modName}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.github_releases": "https://github.com/Yedelo/${modName}/releases/",
+        "modmenu.modrinth": "https://modrinth.com/mod/${modId}"
+      }
+    }
+  }
+}

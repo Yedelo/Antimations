@@ -1,4 +1,4 @@
-rootProject.name = extra["mod.name"].toString()
+rootProject.name = "Antimations"
 
 pluginManagement {
     repositories {
@@ -10,5 +10,24 @@ pluginManagement {
         maven("https://maven.architectury.dev")
         maven("https://maven.minecraftforge.net")
         maven("https://maven.deftu.dev/snapshots")
+        maven("https://maven.kikugie.dev/releases") { name = "KikuGie Releases" }
+        maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie Snapshots" }
+        maven("https://maven.ornithemc.net/releases")
+        maven("https://maven.ornithemc.net/snapshots")
+    }
+}
+
+plugins {
+    id("dev.kikugie.stonecutter") version "0.10-alpha.7"
+}
+
+stonecutter {
+    create(rootProject) {
+        fun registerProject(versionString: String, vararg loaders: String) {
+            for (loader in loaders) version("$versionString-$loader", versionString).buildscript("build.$loader.gradle.kts")
+        }
+
+        registerProject("1.8.9", "forge", "ornithe")
+        vcsVersion = "1.8.9-forge"
     }
 }

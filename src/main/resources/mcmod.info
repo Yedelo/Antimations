@@ -1,12 +1,16 @@
 [
   {
-    "modid": "${mod_id}",
-    "name": "${mod_name}",
-    "description": "${mod_description}",
-    "version": "${mod_version}",
-    "mcversion": "${mc_version}",
-    "url": "https://modrinth.com/project/antimations",
+    "modid": "${modId}",
+    "name": "${modName}",
+    "description": "${modDescription}",
+    "version": "${version}",
+    "mcversion": "${mcVersion}",
+    "url": "https://modrinth.com/mod/${modId}",
     "updateUrl": "",
-    "logoFile": "assets/antimations/antimations.png"
+    "authorList": ["Yedel"],
+    "credits": "Debuggingss for the handsome example mod",
+    "logoFile": "${modIcon}",
+    "screenshots": [],
+    "dependencies": []
   }
 ]

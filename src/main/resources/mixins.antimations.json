@@ -1,8 +1,8 @@
 {
   "package": "at.yedel.antimations.mixin",
-  "refmap": "mixins.${mod_id}.refmap.json",
-  "minVersion": "0.7.11",
-  "compatibilityLevel": "JAVA_8",
+  "refmap": "mixins.${modId}.refmap.json",
+  "minVersion": "${mixinMin}",
+  "compatibilityLevel": "${mixinJava}",
   "client": [
     "MixinEntityCreeper",
     "MixinItem",

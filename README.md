@@ -10,7 +10,12 @@
 
 Safe and customizable mod to cancel various gameplay animations
 
-Use /antimations or the config button in the mod list to open the menu.
+## Dependencies
+
+| **Environment** | **[OneConfig](https://polyfrost.org/projects/oneconfig)** v0/v1 |
+|:---------------:|:---------------------------------------------------------------:|
+|  Forge (1.8.9)  |                      Bundled (via tweaker)                      |
+| Ornithe (1.8.9) |                  Required (separate download)                   |
 
 ## Features
 

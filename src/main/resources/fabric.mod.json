@@ -25,7 +25,7 @@
     "oneconfigv1": "${oneconfigv1}",
     "osl-core": "${oslcore}",
     "osl-entrypoints": "${oslentrypoints}",
-    "osl-networking": "${oslnetworking}"
+    "osl-lifecycle-events": "${osllifecycleevents}"
   },
   "recommends": {
     "modmenu": "*"

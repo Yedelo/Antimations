@@ -21,7 +21,7 @@ val license: String by project
 val javaVersion = JavaVersion.VERSION_25
 val oslCoreVersion = sc.properties["versions.oslcore"]
 val oslEntrypointsVersion = sc.properties["versions.oslentrypoints"]
-val oslNetworkingVersion = sc.properties["versions.oslnetworking"]
+val oslLifecycleEventsVersion = sc.properties["versions.osllifecycleevents"]
 
 repositories {
     fun strictMaven(url: String, alias: String, vararg groups: String) = exclusiveContent {
@@ -71,7 +71,7 @@ dependencies {
     compileOnly("net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7")
     implementation("net.ornithemc.osl-gen2:core:$oslCoreVersion")
     implementation("net.ornithemc.osl-gen2:entrypoints:$oslEntrypointsVersion")
-    implementation("net.ornithemc.osl-gen2:networking:$oslNetworkingVersion")
+    implementation("net.ornithemc.osl-gen2:lifecycle-events:${oslLifecycleEventsVersion}")
 }
 
 loom {
@@ -117,7 +117,7 @@ tasks {
             register("oneconfigv1", target(oneconfigVersion))
             register("oslcore", target(oslCoreVersion))
             register("oslentrypoints", target(oslEntrypointsVersion))
-            register("oslnetworking", target(oslNetworkingVersion))
+            register("osllifecycleevents", target(oslLifecycleEventsVersion))
             register("mixinJava", "JAVA_${javaVersion.majorVersion}")
             register("mixinMin", "0.8")
         }

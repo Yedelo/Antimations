@@ -19,4 +19,4 @@ public class AntimationsConstants {
         public static final String GIT_BRANCH = "@GIT_BRANCH@";
         public static final String GIT_COMMIT = "@GIT_COMMIT@";
         public static final String GIT_URL = "@GIT_URL@";
-    }
+}

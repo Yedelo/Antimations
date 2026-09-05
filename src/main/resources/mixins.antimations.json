@@ -5,10 +5,10 @@
   "compatibilityLevel": "${mixinJava}",
   "client": [
     "MixinEntityCreeper",
-    "MixinItem",
     "MixinItemFishingRod",
     "MixinItemRenderer",
     "MixinMinecraft",
+    "MixinRendererLivingEntity",
     "MixinRenderPlayer"
   ]
 }

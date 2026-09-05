@@ -2,14 +2,23 @@ package at.yedel.antimations.config;
 
 
 
+//? if v0 {
 import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.Slider;
 import cc.polyfrost.oneconfig.config.annotations.Switch;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
+//?} else {
+/*
+import org.polyfrost.oneconfig.api.config.v1.Config;
+import org.polyfrost.oneconfig.api.config.v1.annotations.*;
+import org.polyfrost.oneconfig.utils.v1.dsl.ScreensKt;
+ 
+*///?}
 
 
 
+//~ config_bridge
 public class AntimationsConfig extends Config {
     private static final AntimationsConfig INSTANCE = new AntimationsConfig();
 
@@ -18,6 +27,7 @@ public class AntimationsConfig extends Config {
     }
 
     private AntimationsConfig() {
+        //? if v0 {
         super(
             new Mod(
                 "Antimations",
@@ -29,13 +39,32 @@ public class AntimationsConfig extends Config {
             true
         );
         initialize();
+        //?} else {
+         //super("antimations", "assets/antimations/antimations.png", "Antimations", Category.VISUALS);
+        //?}
     }
+
+    public void open() {
+        //? if v0
+        openGui();
+        //? else
+        //ScreensKt.openUI(this);
+    }
+
+    //? if v1 {
+	/*@Switch(
+		name = "Enabled",
+		description = "Global toggle for the mod."
+	)
+	public boolean enabled = true;
+	*///?}
 
     @Switch(
         name = "Cancel Air Swings",
         description = "Cancel swinging your hand at the air.",
-        category = "Swing Customization",
-        size = 2
+        category = "Swing Customization"
+        //? if v0
+         ,size = 2
     )
     public boolean cancelAirSwings = false;
 

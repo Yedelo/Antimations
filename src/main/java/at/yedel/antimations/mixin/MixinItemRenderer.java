@@ -27,9 +27,12 @@ public abstract class MixinItemRenderer {
 
 	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getIsItemStackEqual(Lnet/minecraft/item/ItemStack;)Z"))
 	private boolean antimations$simplifyEqual(ItemStack instance, ItemStack p_179549_1_) {
-		if (AntimationsConfig.getInstance().cancelItemUpdateHandResets) {
-			if (equippedItemSlot != mc.thePlayer.inventory.currentItem) return false;
-			return itemRenderer.getItemModelMesher().getItemModel(instance) == itemRenderer.getItemModelMesher().getItemModel(p_179549_1_);
+		if (AntimationsConfig.getInstance().enabled) {
+			if (AntimationsConfig.getInstance().cancelAllHandResets) return true;
+			if (AntimationsConfig.getInstance().cancelItemUpdateHandResets) {
+				if (equippedItemSlot != mc.thePlayer.inventory.currentItem) return false;
+				return itemRenderer.getItemModelMesher().getItemModel(instance) == itemRenderer.getItemModelMesher().getItemModel(p_179549_1_);
+			}
 		}
 		return instance.getIsItemStackEqual(p_179549_1_);
 	}

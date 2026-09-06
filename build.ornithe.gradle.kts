@@ -19,6 +19,7 @@ val maxMc by CommonProperty<String?>()
 val finalFileName by CommonProperty<String>()
 val license: String by project
 val javaVersion = JavaVersion.VERSION_25
+val oslVersion = sc.properties["versions.osl"]
 val oslCoreVersion = sc.properties["versions.oslcore"]
 val oslEntrypointsVersion = sc.properties["versions.oslentrypoints"]
 val oslLifecycleEventsVersion = sc.properties["versions.osllifecycleevents"]
@@ -115,9 +116,7 @@ tasks {
                 if (rangedVersion) ">=${sc.current.version} <=${maxMc}" else sc.current.version
             register("minecraft", minecraftDependency)
             register("oneconfigv1", target(oneconfigVersion))
-            register("oslcore", target(oslCoreVersion))
-            register("oslentrypoints", target(oslEntrypointsVersion))
-            register("osllifecycleevents", target(oslLifecycleEventsVersion))
+            register("osl", target(oslVersion))
             register("mixinJava", "JAVA_${javaVersion.majorVersion}")
             register("mixinMin", "0.8")
         }

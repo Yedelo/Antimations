@@ -23,9 +23,7 @@
     "fabricloader": "${fabricLoader}",
     "minecraft": "${minecraft}",
     "oneconfigv1": "${oneconfigv1}",
-    "osl-core": "${oslcore}",
-    "osl-entrypoints": "${oslentrypoints}",
-    "osl-lifecycle-events": "${osllifecycleevents}"
+    "osl": "${osl}"
   },
   "recommends": {
     "modmenu": "*"

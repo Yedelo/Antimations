@@ -9,6 +9,7 @@ versions.oneconfigwrapper = "1.0.0-beta+"
 ["1.8.9-ornithe"]
 versioning = "single"
 versions.oneconfig = "1.1.12"
+versions.osl = "0.20.3"
 versions.oslcore = "0.10.0-alpha.5+mc14w27a-mc1.14.4"
 versions.oslentrypoints = "0.6.1+mc13w16a-mc1.14.4"
 versions.osllifecycleevents = "0.6.1+mc13w36a-mc19w07a"

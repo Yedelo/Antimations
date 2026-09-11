@@ -1,29 +1,32 @@
-name: Run Gradle Build
-on:
-  - push
-  - pull_request
+name: build
+on: [ push, pull_request ]
 
 jobs:
-  gradle:
+  build:
+    name: Build Project
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v4.1.1
 
-      - name: Setup Java
-        uses: actions/setup-java@v4.0.0
+    steps:
+      - uses: actions/checkout@v4
         with:
-          distribution: temurin
+          fetch-depth: 1
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
           java-version: 25
+          distribution: 'microsoft'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Execute Gradle build
-        run: ./gradlew build
-
-      - name: Upload built mod JAR
-        uses: actions/upload-artifact@v4.3.0
+        uses: gradle/actions/setup-gradle@v4
         with:
-          name: mod-jar
-          path: build/libs/*.jar
+          gradle-version: wrapper
+
+      - name: Build with Gradle
+        run: ./gradlew buildAndCollect --no-daemon --stacktrace --console=plain
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: build/libs/

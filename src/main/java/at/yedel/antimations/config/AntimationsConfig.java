@@ -92,6 +92,22 @@ public class AntimationsConfig extends Config {
     public int hurtTimeAdjustment = 10;
 
     @Switch(
+        name = "Fake Swing on Damage",
+        description = "Plays a fake swing animation when the entity you attack is damaged.",
+        category = "Swing Customization"
+    )
+    public boolean fakeSwingOnDamage = false;
+
+    @Slider(
+        name = "Fake Swing Period",
+        description = "The period of time for which fake swings register.",
+        category = "Swing Customization",
+        min = 0,
+        max = 1000
+    )
+    public int fakeSwingPeriod = 250;
+
+    @Switch(
         name = "Cancel Block Hit Swings",
         description = "Cancel swinging your hand when hitting a block.",
         category = "Swing Customization"

@@ -5,6 +5,7 @@ package at.yedel.antimations;
 import at.yedel.antimations.config.AntimationsConfig;
 import at.yedel.antimations.features.AntimationsCommand;
 import at.yedel.antimations.features.CancelOtherPlayerSwings;
+import at.yedel.antimations.features.FakeSwingOnDamage;
 import at.yedel.antimations.launch.AntimationsConstants;
 //? if v0 {
 import cc.polyfrost.oneconfig.events.EventManager;

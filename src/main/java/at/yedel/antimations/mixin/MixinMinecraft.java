@@ -58,11 +58,8 @@ public abstract class MixinMinecraft {
 		else instance.swingItem();
 	}
 
-	@Redirect(method = "rightClickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
-	private void antimations$onInteractWithBlock(EntityPlayerSP instance) {
-		if (AntimationsConfig.getInstance().enabled && AntimationsConfig.getInstance().cancelBlockInteractSwings) {
-			AnimationCanceller.sendAnimationPacket();
-		}
-		else instance.swingItem();
+	@Inject(method = "rightClickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
+	private void antimations$onInteractWithBlock(CallbackInfo ci) {
+		CurrentSwingContext.context = SwingContext.BLOCK_INTERACT;
 	}
 }

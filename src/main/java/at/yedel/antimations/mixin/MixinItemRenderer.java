@@ -3,6 +3,8 @@ package at.yedel.antimations.mixin;
 
 
 import at.yedel.antimations.config.AntimationsConfig;
+import at.yedel.antimations.utils.CurrentSwingContext;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -14,6 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -25,6 +28,23 @@ public abstract class MixinItemRenderer {
 	@Shadow @Final private RenderItem itemRenderer;
 	@Shadow private int equippedItemSlot;
 	@Shadow @Final private Minecraft mc;
+
+	// this is awesome
+	@ModifyVariable(method = {"renderItemMap", "renderPlayerArm", "doItemUsedTransformations", "transformFirstPersonItem"}, at = @At("HEAD"), argsOnly = true, name = "swingProgress")
+	private float antimations$cancelFirstPersonSwings(float original) {
+		if (AntimationsConfig.getInstance().enabled && CurrentSwingContext.shouldCancel()) {
+			return 0;
+		}
+		return original;
+	}
+
+	@ModifyExpressionValue(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;getSwingProgress(F)F"))
+	private float antimations$cancelFirstPersonSwings$2(float original) {
+		if (AntimationsConfig.getInstance().enabled && CurrentSwingContext.shouldCancel()) {
+			return 0;
+		}
+		return original;
+	}
 
 	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getIsItemStackEqual(Lnet/minecraft/item/ItemStack;)Z"))
 	private boolean antimations$simplifyEqual(ItemStack instance, ItemStack p_179549_1_) {

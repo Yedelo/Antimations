@@ -4,9 +4,7 @@ package at.yedel.antimations;
 
 import at.yedel.antimations.config.AntimationsConfig;
 import at.yedel.antimations.features.AntimationsCommand;
-import at.yedel.antimations.features.CancelOtherPlayerSwings;
 import org.polyfrost.oneconfig.api.commands.v1.CommandManager;
-import org.polyfrost.oneconfig.api.event.v1.EventManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.ornithemc.osl.lifecycle.api.client.MinecraftClientEvents;
 import net.minecraft.client.Minecraft;
@@ -29,7 +27,6 @@ public class Antimations implements ClientModInitializer {
 
     private void init() {
         AntimationsConfig.getInstance().preload();
-        EventManager.INSTANCE.register(CancelOtherPlayerSwings.getInstance());
         CommandManager.register(AntimationsCommand.getInstance());
         itemModelMesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
     }

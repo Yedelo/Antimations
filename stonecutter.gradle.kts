@@ -4,7 +4,7 @@ plugins {
     id("dev.kikugie.stonecutter")
 }
 
-stonecutter active "1.8.9-forge"
+stonecutter active "1.8.9-ornithe"
 
 stonecutter parameters {
     val loader = current.project.split("-")[1]

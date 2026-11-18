@@ -28,6 +28,6 @@ stonecutter {
         }
 
         registerProject("1.8.9", "forge", "ornithe")
-        vcsVersion = "1.8.9-forge"
+        vcsVersion = "1.8.9-ornithe"
     }
 }

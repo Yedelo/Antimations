@@ -7,14 +7,14 @@ import at.yedel.antimations.features.AntimationsCommand;
 import at.yedel.antimations.features.CancelOtherPlayerSwings;
 import at.yedel.antimations.launch.AntimationsConstants;
 //? if v0 {
-import cc.polyfrost.oneconfig.events.EventManager;
+/*import cc.polyfrost.oneconfig.events.EventManager;
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
-//?} else {
-//import org.polyfrost.oneconfig.api.commands.v1.CommandManager;
-//import org.polyfrost.oneconfig.api.event.v1.EventManager;
+*///?} else {
+import org.polyfrost.oneconfig.api.commands.v1.CommandManager;
+import org.polyfrost.oneconfig.api.event.v1.EventManager;
 //?}
 //? if forge {
-import net.minecraft.client.gui.GuiButton;
+/*import net.minecraft.client.gui.GuiButton;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -22,9 +22,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkCheckHandler;
 import net.minecraftforge.fml.relauncher.Side;
-//?} else {
-// import net.fabricmc.api.ClientModInitializer;
-// import net.ornithemc.osl.lifecycle.api.client.MinecraftClientEvents;
+*///?} else {
+ import net.fabricmc.api.ClientModInitializer;
+ import net.ornithemc.osl.lifecycle.api.client.MinecraftClientEvents;
 //?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -38,14 +38,14 @@ import java.util.Objects;
 
 
 //? if forge {
-@Mod(
+/*@Mod(
     modid = AntimationsConstants.MOD_ID,
     name = AntimationsConstants.MOD_NAME,
     version = AntimationsConstants.MOD_VERSION,
     clientSideOnly = true
 )
-//?}
-public class Antimations /*? if ornithe {*/ /*implements ClientModInitializer *//*?}*/ {
+*///?}
+public class Antimations /*? if ornithe {*/ implements ClientModInitializer /*?}*/ {
     private static Antimations INSTANCE;
 
     public static Antimations getInstance() {
@@ -66,7 +66,7 @@ public class Antimations /*? if ornithe {*/ /*implements ClientModInitializer */
     }
 
     //? if forge {
-    
+    /*
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         init();
@@ -94,11 +94,11 @@ public class Antimations /*? if ornithe {*/ /*implements ClientModInitializer */
         }
     }
      
-    //?} else {
-    /*@Override
+    *///?} else {
+    @Override
     public void onInitializeClient() {
         // idk this just makes it not crash
         MinecraftClientEvents.READY.register((minecraft) -> init());
     }
-    *///?}
+    //?}
 }

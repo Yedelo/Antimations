@@ -17,6 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinEntityCreeper {
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
     private void antimations$onIgniteCreeper(EntityPlayer player, CallbackInfoReturnable<Boolean> cir) {
-        CurrentSwingContext.context = SwingContext.CREEPER_IGNITION;
+        CurrentSwingContext.context(SwingContext.CREEPER_IGNITION);
     }
 }

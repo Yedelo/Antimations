@@ -19,6 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinItemFishingRod {
     @Inject(method = "onItemRightClick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;swingItem()V"))
     private void antimations$onUseFishingRod(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, CallbackInfoReturnable<ItemStack> cir) {
-        CurrentSwingContext.context = SwingContext.FISHING_ROD;
+        CurrentSwingContext.context(SwingContext.FISHING_ROD);
     }
 }

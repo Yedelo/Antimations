@@ -20,24 +20,24 @@ public abstract class MixinMinecraft {
 
 	@Inject(method = "sendClickBlockToController", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
 	private void antimations$onSwingAtBlock(boolean leftClick, CallbackInfo ci) {
-		CurrentSwingContext.context = SwingContext.BLOCK_HIT;
+		CurrentSwingContext.context(SwingContext.BLOCK_HIT);
 	}
 
 	@Inject(method = "clickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
 	private void antimations$onSwingBareOrAtEntity(CallbackInfo ci) {
         if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.MISS) {
-            CurrentSwingContext.context = SwingContext.AIR;
+            CurrentSwingContext.context(SwingContext.AIR);
         }
         else if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-            CurrentSwingContext.context = SwingContext.BLOCK_HIT;
+            CurrentSwingContext.context(SwingContext.BLOCK_HIT);
         }
         else if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
-			CurrentSwingContext.context = SwingContext.ENTITY_ATTACK;
+			CurrentSwingContext.context(SwingContext.ENTITY_ATTACK);
         }
     }
 
 	@Inject(method = "rightClickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
 	private void antimations$onInteractWithBlock(CallbackInfo ci) {
-		CurrentSwingContext.context = SwingContext.BLOCK_INTERACT;
+		CurrentSwingContext.context(SwingContext.BLOCK_INTERACT);
 	}
 }

@@ -2,20 +2,13 @@
 
 ![icon](src/main/resources/assets/antimations/antimations.png)
 
-![Badge](https://img.shields.io/badge/discord-yedel-blue)
-
-![GitHub Release](https://img.shields.io/github/v/release/Yedelo/Antimations?label=GitHub%20version)
-
-![Modrinth Version](https://img.shields.io/modrinth/v/PSazs4Yz?label=Modrinth%20version)
+![GitHub Release](https://img.shields.io/github/v/release/Yedelo/Antimations?label=GitHub%20version) ![Modrinth Version](https://img.shields.io/modrinth/v/PSazs4Yz?label=Modrinth%20version) ![Badge](https://img.shields.io/badge/discord-yedel-blue)
 
 Safe and customizable mod to cancel various gameplay animations
 
 ## Dependencies
 
-| **Environment** | **[OneConfig](https://polyfrost.org/projects/oneconfig)** v0/v1 |
-|:---------------:|:---------------------------------------------------------------:|
-|  Forge (1.8.9)  |                      Bundled (via tweaker)                      |
-| Ornithe (1.8.9) |                  Required (separate download)                   |
+- [OneConfig](https://polyfrost.org/projects/oneconfig)
 
 ## Features
 

@@ -3,6 +3,7 @@ package at.yedel.antimations.mixin;
 
 
 import at.yedel.antimations.config.AntimationsConfig;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;

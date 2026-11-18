@@ -3,6 +3,8 @@ package at.yedel.antimations.mixin;
 
 
 import at.yedel.antimations.config.AntimationsConfig;
+import at.yedel.antimations.utils.CurrentSwingContext;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,5 +31,13 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> {
         ) {
             entity.limbSwing *= AntimationsConfig.getInstance().weirderLimbScalingMultiplier;
         }
+    }
+
+    @ModifyExpressionValue(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/RendererLivingEntity;getSwingProgress(Lnet/minecraft/entity/EntityLivingBase;F)F"))
+    private float antimations$yall(float original) {
+        if (AntimationsConfig.getInstance().enabled && CurrentSwingContext.shouldCancel()) {
+            return 0;
+        }
+        return original;
     }
 }

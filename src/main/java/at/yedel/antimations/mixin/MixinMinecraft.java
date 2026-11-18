@@ -25,14 +25,13 @@ public abstract class MixinMinecraft {
 
 	@Inject(method = "clickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;swingItem()V"))
 	private void antimations$onSwingBareOrAtEntity(CallbackInfo ci) {
-        if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.MISS) {
-            CurrentSwingContext.context(SwingContext.AIR);
-        }
-        else if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-            CurrentSwingContext.context(SwingContext.BLOCK_HIT);
-        }
-        else if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
-			CurrentSwingContext.context(SwingContext.ENTITY_ATTACK);
+        switch (objectMouseOver.typeOfHit) {
+            case MISS -> CurrentSwingContext.context(SwingContext.AIR);
+            case BLOCK -> CurrentSwingContext.context(SwingContext.BLOCK_HIT);
+            case ENTITY -> {
+                CurrentSwingContext.context(SwingContext.ENTITY_ATTACK);
+                CurrentSwingContext.entity(objectMouseOver.entityHit);
+            }
         }
     }
 

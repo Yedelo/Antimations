@@ -2,12 +2,9 @@ package at.yedel.antimations.mixin;
 
 
 
-import at.yedel.antimations.utils.AnimationCanceller;
-import at.yedel.antimations.config.AntimationsConfig;
 import at.yedel.antimations.utils.CurrentSwingContext;
 import at.yedel.antimations.utils.SwingContext;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MovingObjectPosition;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

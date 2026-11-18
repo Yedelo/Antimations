@@ -2,13 +2,8 @@ package at.yedel.antimations.features;
 
 
 import at.yedel.antimations.config.AntimationsConfig;
-//? if v0 {
-/*import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
-import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
-*///?} else {
 import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Command;
 import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler;
-//?}
 
 
 
@@ -25,7 +20,6 @@ public class AntimationsCommand {
 
     private AntimationsCommand() {}
 
-    //~ if v1 '@Main' -> '@Handler'
     @Handler
     public void main() {
         AntimationsConfig.getInstance().open();

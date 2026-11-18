@@ -70,6 +70,8 @@ dependencies {
     implementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
     implementation("org.polyfrost.oneconfig:${sc.current.version}-ornithe:$oneconfigVersion")
     compileOnly("net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7")
+    // hi
+    compileOnly("io.github.llamalad7:mixinextras-common:0.5.5")
     implementation("net.ornithemc.osl-gen2:core:$oslCoreVersion")
     implementation("net.ornithemc.osl-gen2:entrypoints:$oslEntrypointsVersion")
     implementation("net.ornithemc.osl-gen2:lifecycle-events:${oslLifecycleEventsVersion}")

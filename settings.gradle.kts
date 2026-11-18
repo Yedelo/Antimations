@@ -27,7 +27,7 @@ stonecutter {
             for (loader in loaders) version("$versionString-$loader", versionString).buildscript("build.$loader.gradle.kts")
         }
 
-        registerProject("1.8.9", "forge", "ornithe")
+        registerProject("1.8.9", "ornithe")
         vcsVersion = "1.8.9-ornithe"
     }
 }

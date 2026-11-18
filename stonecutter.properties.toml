@@ -1,9 +1,9 @@
 versions.fabricloader = "0.19.3"
 versions.devauth = "1.2.2"
+versions.oneconfig = "1.8.0"
 
 ["1.8.9-ornithe"]
 versioning = "single"
-versions.oneconfig = "1.1.12"
 versions.osl = "0.20.3"
 versions.oslcore = "0.10.0-alpha.5+mc14w27a-mc1.14.4"
 versions.oslentrypoints = "0.6.1+mc13w16a-mc1.14.4"

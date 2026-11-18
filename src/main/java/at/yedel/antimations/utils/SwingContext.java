@@ -1,4 +1,4 @@
-package at.yedel.antimations.config;
+package at.yedel.antimations.utils;
 
 
 
@@ -8,5 +8,5 @@ public enum SwingContext {
     BLOCK_HIT,
     BLOCK_INTERACT,
     FISHING_ROD,
-    CREEPER_IGNITION
+    CREEPER_IGNITION,
 }

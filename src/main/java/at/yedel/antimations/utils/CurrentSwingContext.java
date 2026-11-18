@@ -23,7 +23,7 @@ public class CurrentSwingContext {
     public static boolean shouldCancel() {
         return switch (currentContext) {
             case AIR -> AntimationsConfig.getInstance().cancelAirSwings;
-            case ENTITY_ATTACK -> AntimationsConfig.getInstance().cancelEntityHitSwings && shouldCancelEntityHit();
+            case ENTITY_HIT -> AntimationsConfig.getInstance().cancelEntityHitSwings && shouldCancelEntityHit();
             case BLOCK_HIT -> AntimationsConfig.getInstance().cancelBlockHitSwings;
             case BLOCK_INTERACT -> AntimationsConfig.getInstance().cancelBlockInteractSwings;
             case FISHING_ROD -> AntimationsConfig.getInstance().cancelFishingRodSwings;

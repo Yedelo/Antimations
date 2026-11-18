@@ -29,7 +29,7 @@ public abstract class MixinMinecraft {
             case MISS -> CurrentSwingContext.context(SwingContext.AIR);
             case BLOCK -> CurrentSwingContext.context(SwingContext.BLOCK_HIT);
             case ENTITY -> {
-                CurrentSwingContext.context(SwingContext.ENTITY_ATTACK);
+                CurrentSwingContext.context(SwingContext.ENTITY_HIT);
                 CurrentSwingContext.entity(objectMouseOver.entityHit);
             }
         }

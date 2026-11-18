@@ -32,12 +32,4 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> {
             entity.limbSwing *= AntimationsConfig.getInstance().weirderLimbScalingMultiplier;
         }
     }
-
-    @ModifyExpressionValue(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/RendererLivingEntity;getSwingProgress(Lnet/minecraft/entity/EntityLivingBase;F)F"))
-    private float antimations$yall(float original) {
-        if (AntimationsConfig.getInstance().enabled && CurrentSwingContext.shouldCancel()) {
-            return 0;
-        }
-        return original;
-    }
 }

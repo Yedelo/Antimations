@@ -8,8 +8,10 @@
     "MixinItemFishingRod",
     "MixinItemRenderer",
     "MixinMinecraft",
-    "MixinModelBiped",
     "MixinRendererLivingEntity",
     "MixinRenderPlayer"
+  ],
+  "mixins": [
+    "MixinEntityLivingBase"
   ]
 }

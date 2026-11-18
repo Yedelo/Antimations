@@ -29,23 +29,6 @@ public abstract class MixinItemRenderer {
 	@Shadow private int equippedItemSlot;
 	@Shadow @Final private Minecraft mc;
 
-	// this is awesome
-	@ModifyVariable(method = {"renderItemMap", "renderPlayerArm", "doItemUsedTransformations", "transformFirstPersonItem"}, at = @At("HEAD"), argsOnly = true, name = "swingProgress")
-	private float antimations$cancelFirstPersonSwings(float original) {
-		if (AntimationsConfig.getInstance().enabled && CurrentSwingContext.shouldCancel()) {
-			return 0;
-		}
-		return original;
-	}
-
-	@ModifyExpressionValue(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;getSwingProgress(F)F"))
-	private float antimations$cancelFirstPersonSwings$2(float original) {
-		if (AntimationsConfig.getInstance().enabled && CurrentSwingContext.shouldCancel()) {
-			return 0;
-		}
-		return original;
-	}
-
 	@Redirect(method = "updateEquippedItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getIsItemStackEqual(Lnet/minecraft/item/ItemStack;)Z"))
 	private boolean antimations$simplifyEqual(ItemStack instance, ItemStack p_179549_1_) {
 		if (AntimationsConfig.getInstance().enabled) {
